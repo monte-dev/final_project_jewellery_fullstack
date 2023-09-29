@@ -9,3 +9,72 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+
+model Product {
+  id            String     @id @default(uuid())
+  name          String     @unique
+  description   String
+  price         Float
+  images        Images[]
+  stockQuantity Int
+  rating        Float
+  cartItems     CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Images {
+  id        String @id @default(uuid())
+  name      String @unique
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+}
+
+model Cart {
+  id        String @id @default(uuid())
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+  cartItems CartItem[]
+  order     Order[]
+}
+
+model CartItem {
+  id        String @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  additionalInfo String?
+  quantity  Int
+  cart      Cart[]
+}
+
+model Order {
+  id              String    @id @default(uuid())
+  shippingAddress String
+  totalAmount     Float
+  orderStatus     String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  cart Cart[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id              String    @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String    @unique
+  password        String
+  role            Role      @default(USER)
+  shippingAddress String?
+  orders          Order[]
+  cart            Cart[]
+}
