@@ -72,9 +72,16 @@ model User {
   firstName       String
   lastName        String
   email           String    @unique
-  password        String
+  password        Password?
   role            Role      @default(USER)
   shippingAddress String?
   orders          Order[]
   cart            Cart[]
+}
+
+model Password {
+  id       String @id @default(uuid())
+  hashedPassword String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String @unique
 }
