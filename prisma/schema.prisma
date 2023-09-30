@@ -51,6 +51,8 @@ model CartItem {
 
 model Order {
   id              String    @id @default(uuid())
+  firstName       String
+  lastName        String
   shippingAddress String
   totalAmount     Float
   orderStatus     String
@@ -69,12 +71,9 @@ enum Role {
 
 model User {
   id              String    @id @default(uuid())
-  firstName       String
-  lastName        String
   email           String    @unique
   password        Password?
   role            Role      @default(USER)
-  shippingAddress String?
   orders          Order[]
   cart            Cart[]
 }

@@ -41,10 +41,10 @@ export class UsersService {
     return user;
   }
 
-  public async createUser(
+  async createUser(
     userData: Omit<User, 'id' | 'role'>,
     password: Password['hashedPassword'],
-  ) {
+  ): Promise<User> {
     try {
       return await this.prismaService.user.create({
         data: {
@@ -64,7 +64,7 @@ export class UsersService {
     }
   }
 
-  public async updateById(
+  async updateById(
     userId: User['id'],
     userData: Omit<User, 'id' | 'role'>,
     password?: string | undefined,
