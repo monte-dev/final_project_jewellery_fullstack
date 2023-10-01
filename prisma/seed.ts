@@ -154,6 +154,7 @@ function getImages() {
     },
   ];
 }
+
 async function seed() {
   await Promise.all(
     getProducts().map((product) => {
@@ -163,7 +164,7 @@ async function seed() {
 
   await Promise.all(
     getImages().map((image) => {
-      return db.images.create({ data: image });
+      return db.image.create({ data: image });
     }),
   );
 }

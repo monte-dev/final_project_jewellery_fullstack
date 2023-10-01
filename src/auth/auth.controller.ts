@@ -33,7 +33,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete('/logout')
+  @Delete('logout')
   async logout(@Response() res) {
     res.clearCookie('auth', { httpOnly: true });
     res.send({
