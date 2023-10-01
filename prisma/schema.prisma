@@ -34,7 +34,7 @@ model Order {
   lastName        String
   shippingAddress String
   totalAmount     Float
-  orderStatus     OrderStatus // Change to an enum for order status
+  orderStatus     OrderStatus
   user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String
 
@@ -49,6 +49,7 @@ model ProductOnOrder {
   order           Order  @relation(fields: [orderId], references: [id])
   orderId         String
   quantity        Int
+  additionalInfo  String
   product         Product @relation(fields: [productId], references: [id])
   productId       String
 }
