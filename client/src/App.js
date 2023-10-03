@@ -6,10 +6,11 @@ import Order from './components/pages/Order/Order.jsx';
 import Product from './components/pages/Product/Product.jsx';
 import Login from './components/pages/Login/Login.jsx';
 import Register from './components/pages/Register/Register.jsx';
+import MainLayout from './components/layout/MainLayout/MainLayout.jsx';
 
 const App = () => {
   return (
-    <div>
+    <MainLayout>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/product/:id" element={<Product />}></Route>
@@ -19,7 +20,7 @@ const App = () => {
         <Route path="/register" element={<Register />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-    </div>
+    </MainLayout>
   );
 };
 export default App;

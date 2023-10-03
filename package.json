@@ -25,6 +25,8 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^4.0.0",
+    "@prisma/client": "^5.3.1",
     "@types/bcryptjs": "^2.4.4",
     "@types/passport-local": "^1.0.34",
     "bcryptjs": "^2.4.3",
