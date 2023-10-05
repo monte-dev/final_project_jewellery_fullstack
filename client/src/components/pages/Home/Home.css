@@ -1,0 +1,17 @@
+.products-parent {
+  background: #f4f4f4;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  margin: 3rem;
+}
+
+.products-parent > div {
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 40%;
+}
