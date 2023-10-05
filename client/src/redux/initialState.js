@@ -1,5 +1,5 @@
 const initialState = {
   products: [],
-  users: null,
+  // users: null,
 };
 export default initialState;
