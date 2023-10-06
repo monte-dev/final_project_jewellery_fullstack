@@ -1,17 +1,16 @@
 import { HiOutlineShoppingCart } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 
 const ProductCard = ({ product }) => {
   return (
-    <div>
-      <div>
-        <img src={product.images[0]} alt={product.name} />
-      </div>
-      <div>
-        <h2>{product.name}</h2>
+    <Card bg="light" border="light">
+      <Card.Img variant="top" src={product.images[0].name} alt={product.name} />
+      <Card.Body>
+        <Card.Title>{product.name}</Card.Title>
         <p>Price: ${product.price}</p>
-        <Link to={`/product/${product.id}`}>
-          <button>Read More</button>
+        <Link to={`/product/${product.id}`} as={Card.Link}>
+          Read More
         </Link>
         <input type="number" min={0} max={200}></input>
 
@@ -19,8 +18,8 @@ const ProductCard = ({ product }) => {
           <HiOutlineShoppingCart />
           Add
         </button>
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   );
 };
 

@@ -1,6 +1,5 @@
 import {
   Offcanvas,
-  NavDropdown,
   Navbar,
   Nav,
   Container,
@@ -17,7 +16,9 @@ const NavBar = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary mb-3">
         <Container fluid>
-          <Navbar.Brand href="#">Diamondville</Navbar.Brand>
+          <Navbar.Brand as={NavLink} to="/">
+            Diamondville
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
           <Navbar.Offcanvas
             id="offcanvasNavbar-expand"

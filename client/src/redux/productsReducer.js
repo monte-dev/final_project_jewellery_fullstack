@@ -4,9 +4,9 @@ import initialState from './initialState';
 
 /* SELECTORS */
 export const getProducts = ({ products }) => products;
-export const getProduct = ({ products }, id) =>
-  products.find((product) => product.id === id);
-
+export const getProductById = ({ products }, id) => {
+  return products.find((product) => product.id === id);
+};
 /* ACTIONS */
 
 const createActionName = (name) => `app/products/${name}`;
@@ -27,6 +27,7 @@ export const fetchProductsFromAPI = () => {
     }
   };
 };
+
 /* REDUCER */
 
 export default function productsReducer(
