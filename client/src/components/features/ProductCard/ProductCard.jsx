@@ -1,3 +1,6 @@
+import { HiOutlineShoppingCart } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
+
 const ProductCard = ({ product }) => {
   return (
     <div>
@@ -6,10 +9,16 @@ const ProductCard = ({ product }) => {
       </div>
       <div>
         <h2>{product.name}</h2>
-        <p>{product.description}</p>
         <p>Price: ${product.price}</p>
-        <p>Rating: {product.rating} stars</p>
-        <p>Stock Quantity: {product.stockQuantity}</p>
+        <Link to={`/product/${product.id}`}>
+          <button>Read More</button>
+        </Link>
+        <input type="number" min={0} max={200}></input>
+
+        <button>
+          <HiOutlineShoppingCart />
+          Add
+        </button>
       </div>
     </div>
   );
