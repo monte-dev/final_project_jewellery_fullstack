@@ -1,6 +1,6 @@
 import {
-  fetchProducts,
   fetchProductsFromAPI,
+  getProducts,
 } from '../../../redux/productsReducer.js';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -10,18 +10,18 @@ import './Home.css';
 import { Spinner } from 'react-bootstrap';
 
 const Home = () => {
-  const products = useSelector((state) => state.products);
+  const products = useSelector(getProducts);
+
+  console.log(products);
   const dispatch = useDispatch();
 
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-
       try {
-        const productsData = await fetchProducts();
-        dispatch(fetchProductsFromAPI(productsData));
+        setLoading(true);
+        await dispatch(fetchProductsFromAPI());
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <main className="products-parent">
-      {isLoading ? (
+      {isLoading && !products ? (
         <Spinner animation="grow" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
