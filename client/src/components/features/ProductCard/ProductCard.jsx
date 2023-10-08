@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 const ProductCard = ({ product }) => {
   return (
-    <Card bg="light" border="light">
+    <Card bg="white" border="light">
       <Card.Img variant="top" src={product.images[0].name} alt={product.name} />
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>

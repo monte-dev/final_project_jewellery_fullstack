@@ -11,6 +11,7 @@ import styles from './product.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { HiArrowLeft } from 'react-icons/hi';
+import { addToCart, removeFromCart } from '../../../redux/cartReducer.js';
 
 const Product = () => {
   const { id } = useParams();
@@ -18,7 +19,6 @@ const Product = () => {
   const navigate = useNavigate();
   const currentProduct = useSelector((state) => getProductById(state, id));
   const [quantity, setQuantity] = useState(1);
-
   useEffect(() => {
     if (!currentProduct) {
       dispatch(fetchSingleProductFromAPI(id));
@@ -26,7 +26,12 @@ const Product = () => {
   }, [dispatch, id, currentProduct]);
   // console.log(currentProduct.images[1].name);
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = (currentProduct, quantity) => {
+    dispatch(addToCart(currentProduct, quantity));
+  };
+  const handleRemoveFromCart = (removedProduct) => {
+    dispatch(removeFromCart(removedProduct.id));
+  };
 
   return (
     <Container className={styles.product}>
@@ -44,7 +49,6 @@ const Product = () => {
             <aside className={styles.productImagesWrapper}>
               <img
                 className={styles.productImage}
-                fluid
                 alt={currentProduct.name}
                 // src={currentProduct.images}
                 src="/assets/images/products/placeholder.svg"
@@ -80,8 +84,14 @@ const Product = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </dd>
-                <Button onClick={handleAddToCart}>
+                <Button
+                  onClick={() => handleAddToCart(currentProduct, quantity)}
+                >
                   <span>Add To Cart</span>
+                  <HiShoppingBag className="mb-1 ms-2" />
+                </Button>
+                <Button onClick={() => handleRemoveFromCart(currentProduct)}>
+                  <span>Remove To Cart</span>
                   <HiShoppingBag className="mb-1 ms-2" />
                 </Button>
               </div>

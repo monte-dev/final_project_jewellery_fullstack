@@ -12,7 +12,6 @@ import { Spinner } from 'react-bootstrap';
 const Home = () => {
   const products = useSelector(getProducts);
 
-  console.log(products);
   const dispatch = useDispatch();
 
   const [isLoading, setLoading] = useState(false);
