@@ -1,5 +1,5 @@
 /* SELECTORS */
-export const getCart = ({ cart }) => cart;
+export const getCart = ({ cart }) => cart.cartItems;
 
 /* ACTIONS */
 
@@ -7,6 +7,7 @@ const createActionName = (name) => `app/cart/${name}`;
 
 const ADD_TO_CART = createActionName('ADD_TO_CART');
 const REMOVE_FROM_CART = createActionName('REMOVE_FROM_CART');
+const CLEAR_CART = createActionName('CLEAR_CART');
 
 export const addToCart = (product, quantity) => ({
   type: ADD_TO_CART,
@@ -16,6 +17,10 @@ export const addToCart = (product, quantity) => ({
 export const removeFromCart = (productId) => ({
   type: REMOVE_FROM_CART,
   payload: productId,
+});
+
+export const clearCart = () => ({
+  type: CLEAR_CART,
 });
 
 /* THUNKS */
@@ -46,7 +51,8 @@ export default function cartReducer(state = initialState, action = {}) {
           (item) => item.id !== productRemovedId,
         ),
       };
-
+    case CLEAR_CART:
+      return { cartItems: [] };
     default:
       return state;
   }

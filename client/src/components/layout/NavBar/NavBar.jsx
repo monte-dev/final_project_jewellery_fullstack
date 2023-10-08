@@ -8,10 +8,27 @@ import {
 } from 'react-bootstrap';
 import { HiOutlineShoppingCart, HiOutlineUser } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
+import CartModal from '../../features/CartModal/CartModal';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getCart } from '../../../redux/cartReducer';
 
 const NavBar = () => {
   const user = undefined;
-  const totalCartItems = '0';
+  const [showCartModal, setShowCartModal] = useState(false);
+  const cartItems = useSelector(getCart);
+
+  const totalCartItems =
+    cartItems && cartItems.length > 0
+      ? cartItems
+          .reduce((total, product) => total + parseInt(product.quantity), 0)
+          .toString()
+      : '0';
+
+  const toggleCartModal = () => {
+    setShowCartModal(!showCartModal);
+  };
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary mb-3">
@@ -55,7 +72,7 @@ const NavBar = () => {
                   </Nav.Link>
                 )}
               </Nav>
-              <Button variant="outline-none">
+              <Button variant="outline-none" onClick={toggleCartModal}>
                 <Badge bg="info" className="align-middle top-0">
                   {totalCartItems}
                 </Badge>
@@ -65,6 +82,9 @@ const NavBar = () => {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+      {showCartModal && (
+        <CartModal showModal={showCartModal} handleClose={toggleCartModal} />
+      )}
     </>
   );
 };

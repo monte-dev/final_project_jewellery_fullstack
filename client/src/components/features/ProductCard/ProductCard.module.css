@@ -18,6 +18,9 @@
   color: #000;
   text-decoration: none;
 }
+.productLink img {
+  max-width: 100%;
+}
 .productLink svg {
   transition: all 0.3s ease-in-out;
 }
@@ -30,7 +33,7 @@
   display: flex;
   gap: 4px;
   margin-top: 1rem;
-  justify-content: space-around;
+  justify-content: end;
 }
 
 .productActionItem {

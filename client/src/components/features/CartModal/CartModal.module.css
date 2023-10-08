@@ -1,0 +1,27 @@
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #222;
+}
+
+.cartItem img {
+  width: 100px;
+  height: 100px;
+  margin-right: 1rem;
+}
+
+.cartItemInfo {
+  flex-grow: 1;
+}
+
+.cartItemActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartItemActions button {
+  margin-top: 0.5rem;
+}

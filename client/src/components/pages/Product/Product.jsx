@@ -84,7 +84,7 @@ const Product = () => {
                 <Button
                   onClick={() => handleAddToCart(currentProduct, quantity)}
                 >
-                  <span>Add To Cart</span>
+                  <span>Add</span>
                   <HiShoppingBag className="mb-1 ms-2" />
                 </Button>
               </div>
