@@ -11,7 +11,7 @@ import styles from './product.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { HiArrowLeft } from 'react-icons/hi';
-import { addToCart, removeFromCart } from '../../../redux/cartReducer.js';
+import { addToCart } from '../../../redux/cartReducer.js';
 
 const Product = () => {
   const { id } = useParams();
@@ -28,9 +28,6 @@ const Product = () => {
 
   const handleAddToCart = (currentProduct, quantity) => {
     dispatch(addToCart(currentProduct, quantity));
-  };
-  const handleRemoveFromCart = (removedProduct) => {
-    dispatch(removeFromCart(removedProduct.id));
   };
 
   return (
@@ -88,10 +85,6 @@ const Product = () => {
                   onClick={() => handleAddToCart(currentProduct, quantity)}
                 >
                   <span>Add To Cart</span>
-                  <HiShoppingBag className="mb-1 ms-2" />
-                </Button>
-                <Button onClick={() => handleRemoveFromCart(currentProduct)}>
-                  <span>Remove To Cart</span>
                   <HiShoppingBag className="mb-1 ms-2" />
                 </Button>
               </div>

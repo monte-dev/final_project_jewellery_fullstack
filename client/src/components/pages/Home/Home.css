@@ -2,11 +2,9 @@
   background: #f8f9fa;
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem;
   justify-content: center;
-  align-items: stretch;
   gap: 2rem;
-  margin: 3rem;
+  padding: 1rem 0;
 }
 
 .product-card {
@@ -14,4 +12,11 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 40%;
+}
+
+@media (min-width: 1200px) {
+  .products-parent {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 }
