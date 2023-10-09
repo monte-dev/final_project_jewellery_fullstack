@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart, removeFromCart, clearCart } from '../../../redux/cartReducer';
 import styles from './CartModal.module.css';
+import { NavLink } from 'react-router-dom';
+import { HiTrash } from 'react-icons/hi';
 
 const CartModal = ({ showModal, handleClose }) => {
   const cartItems = useSelector(getCart);
@@ -31,10 +33,10 @@ const CartModal = ({ showModal, handleClose }) => {
                 </div>
                 <div className={styles.cartItemActions}>
                   <Button
-                    variant="danger"
+                    variant="secondary"
                     onClick={() => dispatch(removeFromCart(cartItem.id))}
                   >
-                    X
+                    <HiTrash className="mb-1" />
                   </Button>
                 </div>
               </div>
@@ -44,9 +46,11 @@ const CartModal = ({ showModal, handleClose }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            View Cart
-          </Button>
+          <NavLink to="/cart">
+            <Button variant="primary" onClick={handleClose}>
+              View Cart
+            </Button>
+          </NavLink>
           <Button variant="danger" onClick={() => dispatch(clearCart())}>
             Clear Cart
           </Button>
