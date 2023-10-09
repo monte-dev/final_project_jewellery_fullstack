@@ -8,6 +8,12 @@ const createActionName = (name) => `app/cart/${name}`;
 const ADD_TO_CART = createActionName('ADD_TO_CART');
 const REMOVE_FROM_CART = createActionName('REMOVE_FROM_CART');
 const CLEAR_CART = createActionName('CLEAR_CART');
+const UPDATE_QUANTITY = createActionName('UPDATE_QUANTITY');
+
+export const updateQuantity = (productId, quantity) => ({
+  type: UPDATE_QUANTITY,
+  payload: { productId, quantity },
+});
 
 export const addToCart = (product, quantity) => ({
   type: ADD_TO_CART,
@@ -49,6 +55,14 @@ export default function cartReducer(state = initialState, action = {}) {
         ...state,
         cartItems: state.cartItems.filter(
           (item) => item.id !== productRemovedId,
+        ),
+      };
+    case UPDATE_QUANTITY:
+      const { productId, quantity: updatedQuantity } = action.payload;
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) =>
+          item.id === productId ? { ...item, quantity: updatedQuantity } : item,
         ),
       };
     case CLEAR_CART:

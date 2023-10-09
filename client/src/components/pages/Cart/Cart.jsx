@@ -1,20 +1,36 @@
 import { Button, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { getCart } from '../../../redux/cartReducer';
+import {
+  getCart,
+  removeFromCart,
+  updateQuantity,
+} from '../../../redux/cartReducer';
 import styles from './Cart.module.css';
 import { HiTrash } from 'react-icons/hi';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const Cart = () => {
   const cartItems = useSelector(getCart);
+  const dispatch = useDispatch();
 
-  const initialQty = {};
-  cartItems.forEach((item) => {
-    initialQty[item.id] = item.quantity;
-  });
-
-  const [quantity, setQuantity] = useState(initialQty || 1);
   console.log(cartItems);
+
+  const cartTotal = cartItems
+    .reduce((acc, item) => {
+      const itemTotalCost = item.price * item.quantity;
+      return acc + itemTotalCost;
+    }, 0)
+    .toFixed(2);
+
+  const handleQuantityChange = (cartItem, updatedQuantity) => {
+    if (updatedQuantity >= 1) {
+      const validatedQuantity = Math.min(updatedQuantity, 100);
+      dispatch(updateQuantity(cartItem.id, validatedQuantity));
+    } else {
+      dispatch(updateQuantity(cartItem.id, 1));
+    }
+  };
 
   if (!cartItems || cartItems.length < 1) {
     return (
@@ -30,33 +46,33 @@ const Cart = () => {
     <Container>
       <section className={styles.cartWrapper}>
         <h2>Cart</h2>
-        {cartItems.map((item) => (
-          <div key={item.id} className={styles.itemContainer}>
+        {cartItems.map((cartItem) => (
+          <div key={cartItem.id} className={styles.itemContainer}>
             <div className={styles.itemImage}>
               {/* <img src={cartItem.images[0]} alt={cartItem.name} /> */}
               <img
-                alt={item.name}
+                alt={cartItem.name}
                 // src={item.images}
                 src="/assets/images/products/placeholder.svg"
               ></img>
             </div>
             <div className={styles.itemInfo}>
-              <p>{item.name}</p>
-              <p>${item.price}</p>
+              <p>{cartItem.name}</p>
+              <p>${cartItem.price}</p>
             </div>
             <div className={styles.itemActions}>
               <div>
                 <input
                   type="number"
-                  min="1"
-                  value={quantity[item.id]}
+                  value={cartItem.quantity}
                   onChange={(e) =>
-                    setQuantity({ ...quantity, [item.id]: e.target.value })
+                    handleQuantityChange(cartItem, parseInt(e.target.value))
                   }
                 />
                 <Button
                   variant="secondary"
                   className={styles.productActionItem}
+                  onClick={() => dispatch(removeFromCart(cartItem.id))}
                 >
                   <HiTrash className="mb-1" />
                 </Button>
@@ -65,11 +81,14 @@ const Cart = () => {
           </div>
         ))}
         <div className={styles.cartActions}>
-          <p>Total: {}</p>
-          <Button variant="info">Checkout</Button>
+          <p>
+            Total: <span>${cartTotal}</span>
+          </p>
+          <NavLink to="/order">
+            <Button variant="primary">Continue To Checkout</Button>
+          </NavLink>
         </div>
       </section>
-      <section></section>
     </Container>
   );
 };
