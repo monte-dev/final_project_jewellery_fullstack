@@ -14,8 +14,6 @@ const Cart = () => {
   const cartItems = useSelector(getCart);
   const dispatch = useDispatch();
 
-  console.log(cartItems);
-
   const cartTotal = cartItems
     .reduce((acc, item) => {
       const itemTotalCost = item.price * item.quantity;

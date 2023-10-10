@@ -1,0 +1,14 @@
+.orderWrapper {
+  max-width: 1000px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+@media screen and (min-width: 576px) {
+  .orderWrapper {
+    padding: 2.5rem 3rem;
+  }
+}

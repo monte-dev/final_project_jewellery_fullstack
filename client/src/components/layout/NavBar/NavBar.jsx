@@ -31,7 +31,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary mb-3">
+      <Navbar expand="md" className="bg-body-tertiary mb-3">
         <Container fluid>
           <Navbar.Brand as={NavLink} to="/">
             Diamondville

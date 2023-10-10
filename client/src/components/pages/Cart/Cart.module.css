@@ -1,5 +1,5 @@
 .cartWrapper {
-  max-width: 900px;
+  max-width: 1000px;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -48,11 +48,9 @@
   align-self: flex-end;
 }
 .cartActions p {
-  width: fit-content;
   font-size: 1.25rem;
   border-top: 1px solid #222;
   border-bottom: 1px solid #222;
-  float: right;
 }
 .cartActions p span {
   float: right;
