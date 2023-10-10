@@ -16,6 +16,7 @@ import { getCart } from '../../../redux/cartReducer';
 const NavBar = () => {
   const user = undefined;
   const [showCartModal, setShowCartModal] = useState(false);
+  const [offCanvasOpen, setOffcanvasOpen] = useState(false);
   const cartItems = useSelector(getCart);
 
   const totalCartItems =
@@ -29,6 +30,14 @@ const NavBar = () => {
     setShowCartModal(!showCartModal);
   };
 
+  const toggleOffcanvas = () => {
+    setOffcanvasOpen(!offCanvasOpen);
+  };
+
+  const handleCloseOffcanvas = () => {
+    setOffcanvasOpen(false);
+  };
+
   return (
     <>
       <Navbar expand="md" className="bg-body-tertiary mb-3">
@@ -36,8 +45,13 @@ const NavBar = () => {
           <Navbar.Brand as={NavLink} to="/">
             Diamondville
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
+          <Navbar.Toggle
+            aria-controls="offcanvasNavbar-expand"
+            onClick={toggleOffcanvas}
+          />
           <Navbar.Offcanvas
+            show={offCanvasOpen}
+            onHide={handleCloseOffcanvas}
             id="offcanvasNavbar-expand"
             aria-labelledby="offcanvasNavbarLabel-expand"
             placement="end"
@@ -49,20 +63,32 @@ const NavBar = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3 me-3">
-                <Nav.Link as={NavLink} to="/">
+                <Nav.Link as={NavLink} to="/" onClick={handleCloseOffcanvas}>
                   Home
                 </Nav.Link>
-                <Nav.Link as={NavLink} to="/contact">
+                <Nav.Link
+                  as={NavLink}
+                  to="/contact"
+                  onClick={handleCloseOffcanvas}
+                >
                   Contact us
                 </Nav.Link>
               </Nav>
               <Nav className="me-3">
                 {!user ? (
                   <>
-                    <Nav.Link as={NavLink} to="/login">
+                    <Nav.Link
+                      as={NavLink}
+                      to="/login"
+                      onClick={handleCloseOffcanvas}
+                    >
                       Login
                     </Nav.Link>
-                    <Nav.Link as={NavLink} to="/register">
+                    <Nav.Link
+                      as={NavLink}
+                      to="/register"
+                      onClick={handleCloseOffcanvas}
+                    >
                       Register
                     </Nav.Link>
                   </>
@@ -72,7 +98,13 @@ const NavBar = () => {
                   </Nav.Link>
                 )}
               </Nav>
-              <Button variant="outline-none" onClick={toggleCartModal}>
+              <Button
+                variant="outline-none"
+                onClick={() => {
+                  toggleCartModal();
+                  handleCloseOffcanvas();
+                }}
+              >
                 <Badge bg="info" className="align-middle top-0">
                   {totalCartItems}
                 </Badge>
