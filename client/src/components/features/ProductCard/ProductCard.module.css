@@ -33,7 +33,7 @@
   display: flex;
   gap: 4px;
   margin-top: 1rem;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .productActionItem {
