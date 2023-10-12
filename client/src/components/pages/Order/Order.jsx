@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styles from './Order.module.css';
 import { Button, Form } from 'react-bootstrap';
+import { createOrderRequest } from '../../../redux/orderReducer.js';
+import { useDispatch } from 'react-redux';
 
 const Order = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartItems = useSelector(getCart);
 
   const [addressData, setAddressData] = useState({
@@ -33,6 +36,11 @@ const Order = () => {
     setAddressData({ ...addressData, [name]: value });
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createOrderRequest(formData));
+  };
+
   useEffect(() => {
     if (!cartItems || cartItems.length < 1) {
       navigate('/');
@@ -52,7 +60,7 @@ const Order = () => {
         </ul>
       </section>
       <section className={styles.orderDeliveryForm}>
-        <Form>
+        <Form onSubmit={handleFormSubmit}>
           <Form.Group>
             <Form.Label>First Name</Form.Label>
             <Form.Control

@@ -1,5 +1,8 @@
+import axios from 'axios';
+import { API_URL } from '../config';
+
 /* SELECTORS */
-export const getOrder = ({ order }) => order;
+export const getOrder = ({ orders }) => orders;
 
 /* ACTIONS */
 
@@ -11,13 +14,28 @@ export const createOrder = (orderData) => ({
   type: CREATE_ORDER,
   payload: orderData,
 });
-
 /* THUNKS */
+
+export const createOrderRequest = (orderData) => {
+  return async (dispatch) => {
+    try {
+      const options = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      await axios.post(`${API_URL}/orders`, orderData, options);
+      dispatch(createOrder(orderData));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 /* INITIAL STATE */
 
 const initialState = {
-  order: [],
+  orders: [],
 };
 
 /* REDUCER */
