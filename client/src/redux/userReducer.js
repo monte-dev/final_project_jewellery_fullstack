@@ -35,18 +35,6 @@ export const registerUserRequest = (userData) => {
   };
 };
 
-export const loginUserRequest = (userData) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.post(`${API_URL}/auth/login`, userData);
-
-      dispatch(login(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
 export const logoutUserRequest = () => {
   return async (dispatch) => {
     dispatch(logout());
