@@ -1,11 +1,5 @@
-import {
-  Module,
-  NestModule,
-  MiddlewareConsumer,
-  RequestMethod,
-} from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
-import * as cors from 'cors';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
@@ -33,10 +27,5 @@ import { join } from 'path';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(cors()).forRoutes({
-      path: '*',
-      method: RequestMethod.ALL,
-    });
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }

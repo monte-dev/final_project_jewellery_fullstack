@@ -12,9 +12,10 @@ import CartModal from '../../features/CartModal/CartModal';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getCart } from '../../../redux/cartReducer';
+import { getCurrentUser } from '../../../redux/userReducer';
 
 const NavBar = () => {
-  const user = undefined;
+  const user = useSelector(getCurrentUser);
   const [showCartModal, setShowCartModal] = useState(false);
   const [offCanvasOpen, setOffcanvasOpen] = useState(false);
   const cartItems = useSelector(getCart);

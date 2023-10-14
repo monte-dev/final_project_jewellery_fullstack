@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { login, loginUserRequest } from '../../../redux/userReducer';
+import { login } from '../../../redux/userReducer';
 import { useDispatch } from 'react-redux';
 import { API_URL } from '../../../config';
 const Login = () => {
@@ -8,26 +8,29 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginForm = (e) => {
+  const handleLoginForm = async (e) => {
     e.preventDefault();
-    const options = {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    };
-    fetch(`${API_URL}/auth/login`, options)
-      .then((res) => {
-        if (res.status === 200) {
-          dispatch(login({ login }));
-        } else {
-        }
-      })
-      .catch((err) => {
-        console.log('fetching error', err);
+
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
+
+      if (res.status === 200 || res.status === 201) {
+        const userData = await res.json();
+        dispatch(login(userData));
+      } else {
+        const errorData = await res.json();
+        console.error('Login failed:', errorData);
+      }
+    } catch (error) {
+      console.error('Login error', error);
+    }
   };
 
   return (

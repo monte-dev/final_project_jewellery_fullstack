@@ -28,7 +28,7 @@ export class AuthController {
     const tokens = await this.authService.createSession(req.user);
     res.cookie('auth', tokens, { httpOnly: true });
     res.send({
-      message: 'success',
+      user: req.user,
     });
   }
 
