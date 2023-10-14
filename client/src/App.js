@@ -7,8 +7,20 @@ import Product from './components/pages/Product/Product.jsx';
 import Login from './components/pages/Login/Login.jsx';
 import Register from './components/pages/Register/Register.jsx';
 import MainLayout from './components/layout/MainLayout/MainLayout.jsx';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from './redux/userReducer.js';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userLoggedIn = localStorage.getItem('loginCookie');
+    if (userLoggedIn) {
+      dispatch(login(JSON.parse(userLoggedIn).user));
+    }
+  }, [dispatch]);
+
   return (
     <MainLayout>
       <Routes>

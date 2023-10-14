@@ -7,14 +7,17 @@ import {
   Badge,
 } from 'react-bootstrap';
 import { HiOutlineShoppingCart, HiOutlineUser } from 'react-icons/hi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import CartModal from '../../features/CartModal/CartModal';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getCart } from '../../../redux/cartReducer';
-import { getCurrentUser } from '../../../redux/userReducer';
+import { getCurrentUser, logoutUserRequest } from '../../../redux/userReducer';
+import { useDispatch } from 'react-redux';
 
 const NavBar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector(getCurrentUser);
   const [showCartModal, setShowCartModal] = useState(false);
   const [offCanvasOpen, setOffcanvasOpen] = useState(false);
@@ -37,6 +40,12 @@ const NavBar = () => {
 
   const handleCloseOffcanvas = () => {
     setOffcanvasOpen(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUserRequest());
+
+    navigate('/');
   };
 
   return (
@@ -76,7 +85,14 @@ const NavBar = () => {
                 </Nav.Link>
               </Nav>
               <Nav className="me-3">
-                {!user ? (
+                {user ? (
+                  <>
+                    <Nav.Link as={NavLink} className="px-0">
+                      <HiOutlineUser />
+                    </Nav.Link>
+                    <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                  </>
+                ) : (
                   <>
                     <Nav.Link
                       as={NavLink}
@@ -93,10 +109,6 @@ const NavBar = () => {
                       Register
                     </Nav.Link>
                   </>
-                ) : (
-                  <Nav.Link as={NavLink}>
-                    <HiOutlineUser />
-                  </Nav.Link>
                 )}
               </Nav>
               <Button

@@ -1,37 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { login } from '../../../redux/userReducer';
+import { loginUserRequest } from '../../../redux/userReducer';
 import { useDispatch } from 'react-redux';
-import { API_URL } from '../../../config';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginForm = async (e) => {
+  const handleLoginForm = (e) => {
     e.preventDefault();
-
-    try {
-      const res = await fetch(`${API_URL}/auth/login`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (res.status === 200 || res.status === 201) {
-        const userData = await res.json();
-        dispatch(login(userData));
-      } else {
-        const errorData = await res.json();
-        console.error('Login failed:', errorData);
-      }
-    } catch (error) {
-      console.error('Login error', error);
-    }
+    dispatch(loginUserRequest(email, password));
   };
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <div>

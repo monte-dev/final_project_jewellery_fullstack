@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 /* SELECTORS */
-export const getCurrentUser = (state) => state.user;
+export const getCurrentUser = (state) => state.user.user;
 
 /* ACTIONS */
 const createActionName = (name) => `app/user/${name}`;
@@ -24,6 +24,33 @@ export const logout = () => ({
 });
 
 /* THUNKS */
+export const loginUserRequest = (email, password) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.status === 200 || res.status === 201) {
+        const userData = await res.json();
+        console.log(userData);
+        localStorage.setItem('loginCookie', JSON.stringify(userData));
+        dispatch(login(userData));
+      } else {
+        const errorData = await res.json();
+        console.error('Login failed:', errorData);
+      }
+    } catch (error) {
+      console.error('Login error', error);
+    }
+  };
+};
+
 export const registerUserRequest = (userData) => {
   return async (dispatch) => {
     try {
@@ -37,7 +64,12 @@ export const registerUserRequest = (userData) => {
 
 export const logoutUserRequest = () => {
   return async (dispatch) => {
-    dispatch(logout());
+    try {
+      dispatch(logout());
+      localStorage.removeItem('loginCookie');
+    } catch (error) {
+      console.log(error, 'error logging out');
+    }
   };
 };
 
