@@ -1,0 +1,24 @@
+.loginWrapper {
+  max-width: 600px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+.loginInput {
+  margin: 0 auto;
+  max-width: 300px;
+}
+.loginButton {
+  margin: 1rem auto;
+
+  max-width: 200px;
+}
+
+@media screen and (min-width: 576px) {
+  .loginWrapper {
+    margin-top: 2rem;
+    padding: 2.5rem 3rem;
+  }
+}
