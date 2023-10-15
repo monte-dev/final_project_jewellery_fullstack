@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form, Spinner } from 'react-bootstrap';
-import { createOrderRequest } from '../../../redux/orderReducer.js';
-import { getCart } from '../../../redux/cartReducer.js';
+import { Alert, Button, Form, Spinner } from 'react-bootstrap';
+import { clearOrder, createOrderRequest } from '../../../redux/orderReducer.js';
+import { clearCart, getCart } from '../../../redux/cartReducer.js';
 import styles from './Order.module.css';
 
 const Order = () => {
@@ -11,8 +11,8 @@ const Order = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cartItems = useSelector(getCart);
-
   const [loading, setLoading] = useState(true);
+  const [orderSent, setOrderSent] = useState(false);
   const [addressData, setAddressData] = useState({
     streetAddress: '',
     city: '',
@@ -76,12 +76,29 @@ const Order = () => {
     e.preventDefault();
     console.log(orderData);
     dispatch(createOrderRequest(orderData));
+    setOrderSent(true);
+    setTimeout(() => {
+      navigate('/');
+      dispatch(clearCart());
+      dispatch(clearOrder());
+    }, 5000);
   };
 
   if (loading) {
-    return <Spinner>Loading...</Spinner>;
+    return (
+      <Spinner animation="border" role="status">
+        Loading...
+      </Spinner>
+    );
+  } else if (orderSent) {
+    return (
+      <Alert variant="success">
+        Your order has been submitted successfully!
+        <hr></hr>
+        <p>You will be redirected in 5 seconds...</p>
+      </Alert>
+    );
   }
-
   return (
     <main>
       <h2>Order Summary</h2>

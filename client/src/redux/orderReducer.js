@@ -10,6 +10,7 @@ const createActionName = (name) => `app/order/${name}`;
 
 const CREATE_ORDER = createActionName('CREATE_ORDER');
 const CREATE_ORDER_ERROR = createActionName('CREATE_ORDER_ERROR');
+const CLEAR_ORDER = createActionName('CLEAR_ORDER');
 
 export const createOrderError = (errorMessage) => ({
   type: CREATE_ORDER_ERROR,
@@ -19,6 +20,10 @@ export const createOrderError = (errorMessage) => ({
 export const createOrder = (orderData) => ({
   type: CREATE_ORDER,
   payload: orderData,
+});
+
+export const clearOrder = () => ({
+  type: CLEAR_ORDER,
 });
 /* THUNKS */
 
@@ -55,6 +60,8 @@ export default function orderReducer(state = initialState, action = {}) {
       return { ...state, order: action.payload };
     case CREATE_ORDER_ERROR:
       return { ...state, error: action.payload };
+    case CLEAR_ORDER:
+      return null;
     default:
       return state;
   }
