@@ -20,10 +20,8 @@ const CartModal = ({ showModal, handleClose }) => {
           {cartItems && cartItems.length > 0 ? (
             cartItems.map((cartItem) => (
               <div key={cartItem.id} className={styles.cartItem}>
-                {/* <img src={cartItem.images[0]} alt={cartItem.name} /> */}
                 <img
                   alt={cartItem.name}
-                  // src={currentProduct.images}
                   src="/assets/images/products/placeholder.svg"
                 ></img>
                 <div className={styles.cartItemInfo}>
@@ -48,7 +46,7 @@ const CartModal = ({ showModal, handleClose }) => {
         <Modal.Footer>
           <NavLink to="/cart">
             <Button variant="primary" onClick={handleClose}>
-              View Cart
+              View/Edit Cart
             </Button>
           </NavLink>
           <Button variant="danger" onClick={() => dispatch(clearCart())}>

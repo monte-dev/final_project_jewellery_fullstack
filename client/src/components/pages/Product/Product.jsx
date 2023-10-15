@@ -19,15 +19,16 @@ const Product = () => {
   const navigate = useNavigate();
   const currentProduct = useSelector((state) => getProductById(state, id));
   const [quantity, setQuantity] = useState(1);
+  const [additionalInfo, setAdditionalInfo] = useState('');
+
   useEffect(() => {
     if (!currentProduct) {
       dispatch(fetchSingleProductFromAPI(id));
     }
   }, [dispatch, id, currentProduct]);
-  // console.log(currentProduct.images[1].name);
 
-  const handleAddToCart = (currentProduct, quantity) => {
-    dispatch(addToCart(currentProduct, quantity));
+  const handleAddToCart = (currentProduct, quantity, additionalInfo) => {
+    dispatch(addToCart(currentProduct, quantity, additionalInfo));
   };
 
   return (
@@ -47,7 +48,6 @@ const Product = () => {
               <img
                 className={styles.productImage}
                 alt={currentProduct.name}
-                // src={currentProduct.images}
                 src="/assets/images/products/placeholder.svg"
               ></img>
             </aside>
@@ -71,6 +71,13 @@ const Product = () => {
                 </dd>
               </dl>
               <p>{currentProduct.description}</p>
+              <dd className={styles.productActionItem}>
+                <textarea
+                  placeholder="Additional request?"
+                  value={additionalInfo}
+                  onChange={(e) => setAdditionalInfo(e.target.value)}
+                ></textarea>
+              </dd>
               <div className={styles.productAction}>
                 <dt className={styles.productActionItem}>Quantity:</dt>
                 <dd className={styles.productActionItem}>
@@ -82,7 +89,9 @@ const Product = () => {
                   />
                 </dd>
                 <Button
-                  onClick={() => handleAddToCart(currentProduct, quantity)}
+                  onClick={() =>
+                    handleAddToCart(currentProduct, quantity, additionalInfo)
+                  }
                 >
                   <span>Add</span>
                   <HiShoppingBag className="mb-1 ms-2" />

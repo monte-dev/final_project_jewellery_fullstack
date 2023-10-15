@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   getCart,
   removeFromCart,
+  updateAdditionalInfo,
   updateQuantity,
 } from '../../../redux/cartReducer';
 import styles from './Cart.module.css';
@@ -47,16 +48,25 @@ const Cart = () => {
         {cartItems.map((cartItem) => (
           <div key={cartItem.id} className={styles.itemContainer}>
             <div className={styles.itemImage}>
-              {/* <img src={cartItem.images[0]} alt={cartItem.name} /> */}
               <img
                 alt={cartItem.name}
-                // src={item.images}
                 src="/assets/images/products/placeholder.svg"
               ></img>
             </div>
             <div className={styles.itemInfo}>
               <p>{cartItem.name}</p>
               <p>${cartItem.price}</p>
+            </div>
+            <div className={styles.itemInfo}>
+              <textarea
+                name="additionalInfo"
+                id="additionalInfo"
+                value={cartItem.additionalInfo}
+                onChange={(e) => {
+                  const updatedInfo = e.target.value;
+                  dispatch(updateAdditionalInfo(cartItem.id, updatedInfo));
+                }}
+              ></textarea>
             </div>
             <div className={styles.itemActions}>
               <div>

@@ -40,6 +40,10 @@
   padding: 6px 0;
   margin-bottom: 0;
 }
+.productActionItem textarea {
+  resize: none;
+  width: 300px;
+}
 .productAction input {
   max-width: 60px;
   text-align: center;

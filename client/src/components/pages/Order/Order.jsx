@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Spinner } from 'react-bootstrap';
 import { createOrderRequest } from '../../../redux/orderReducer.js';
 import { getCart } from '../../../redux/cartReducer.js';
 import styles from './Order.module.css';
-import { getCurrentUser } from '../../../redux/userReducer.js';
 
 const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector(getCurrentUser);
+  const user = useSelector((state) => state.user);
   const cartItems = useSelector(getCart);
 
+  const [loading, setLoading] = useState(true);
   const [addressData, setAddressData] = useState({
     streetAddress: '',
     city: '',
@@ -25,6 +25,20 @@ const Order = () => {
     email: '',
     products: cartItems,
   });
+
+  useEffect(() => {
+    if (!user || !user.user || user.user.id == null) {
+      navigate('/');
+    } else {
+      setLoading(false);
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    if (!cartItems || cartItems.length < 1) {
+      navigate('/');
+    }
+  }, [cartItems, navigate, user]);
 
   const calculateTotalAmount = () => {
     let totalAmount = 0;
@@ -44,7 +58,7 @@ const Order = () => {
     products: cartItems.map((item) => ({
       productId: item.id,
       quantity: item.quantity,
-      additionalInfo: 'testestesttest',
+      additionalInfo: item.additionalInfo || '',
     })),
   };
   console.log(orderData);
@@ -64,11 +78,9 @@ const Order = () => {
     dispatch(createOrderRequest(orderData));
   };
 
-  useEffect(() => {
-    if (!cartItems || cartItems.length < 1 || !user) {
-      navigate('/');
-    }
-  }, [cartItems, navigate, user]);
+  if (loading) {
+    return <Spinner>Loading...</Spinner>;
+  }
 
   return (
     <main>
