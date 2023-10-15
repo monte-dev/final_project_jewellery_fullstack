@@ -1,15 +1,16 @@
-import { useSelector } from 'react-redux';
-import { getCart } from '../../../redux/cartReducer.js';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import styles from './Order.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { createOrderRequest } from '../../../redux/orderReducer.js';
-import { useDispatch } from 'react-redux';
+import { getCart } from '../../../redux/cartReducer.js';
+import styles from './Order.module.css';
+import { getCurrentUser } from '../../../redux/userReducer.js';
 
 const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector(getCurrentUser);
   const cartItems = useSelector(getCart);
 
   const [addressData, setAddressData] = useState({
@@ -22,10 +23,31 @@ const Order = () => {
     firstName: '',
     lastName: '',
     email: '',
-    shippingAddress: addressData,
     products: cartItems,
   });
 
+  const calculateTotalAmount = () => {
+    let totalAmount = 0;
+    cartItems.forEach((item) => {
+      totalAmount += item.quantity;
+    });
+    return totalAmount;
+  };
+
+  const orderData = {
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    shippingAddress: `${addressData.streetAddress}, ${addressData.city}, ${addressData.postCode}`,
+    totalAmount: calculateTotalAmount(cartItems),
+    orderStatus: 'PROCESSING',
+    userId: user.user.id,
+    products: cartItems.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+      additionalInfo: 'testestesttest',
+    })),
+  };
+  console.log(orderData);
   const handleFormInput = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -38,14 +60,15 @@ const Order = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(createOrderRequest(formData));
+    console.log(orderData);
+    dispatch(createOrderRequest(orderData));
   };
 
   useEffect(() => {
-    if (!cartItems || cartItems.length < 1) {
+    if (!cartItems || cartItems.length < 1 || !user) {
       navigate('/');
     }
-  }, [cartItems, navigate]);
+  }, [cartItems, navigate, user]);
 
   return (
     <main>

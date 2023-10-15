@@ -2,13 +2,19 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 /* SELECTORS */
-export const getOrder = ({ orders }) => orders;
+export const getOrder = ({ order }) => order;
 
 /* ACTIONS */
 
 const createActionName = (name) => `app/order/${name}`;
 
 const CREATE_ORDER = createActionName('CREATE_ORDER');
+const CREATE_ORDER_ERROR = createActionName('CREATE_ORDER_ERROR');
+
+export const createOrderError = (errorMessage) => ({
+  type: CREATE_ORDER_ERROR,
+  payload: errorMessage,
+});
 
 export const createOrder = (orderData) => ({
   type: CREATE_ORDER,
@@ -20,6 +26,7 @@ export const createOrderRequest = (orderData) => {
   return async (dispatch) => {
     try {
       const options = {
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -28,6 +35,7 @@ export const createOrderRequest = (orderData) => {
       dispatch(createOrder(orderData));
     } catch (err) {
       console.log(err);
+      dispatch(createOrderError(err.message));
     }
   };
 };
@@ -35,7 +43,7 @@ export const createOrderRequest = (orderData) => {
 /* INITIAL STATE */
 
 const initialState = {
-  orders: [],
+  order: null,
 };
 
 /* REDUCER */
@@ -43,7 +51,10 @@ const initialState = {
 export default function orderReducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_ORDER:
-      return [...state, ...action.payload];
+      console.log(action.payload);
+      return { ...state, order: action.payload };
+    case CREATE_ORDER_ERROR:
+      return { ...state, error: action.payload };
     default:
       return state;
   }
