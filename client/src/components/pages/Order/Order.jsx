@@ -10,8 +10,14 @@ const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  let userId;
+  if (user.user !== null) {
+    userId = user.user.id;
+  } else {
+    userId = null;
+  }
   const cartItems = useSelector(getCart);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [orderSent, setOrderSent] = useState(false);
   const [addressData, setAddressData] = useState({
     streetAddress: '',
@@ -25,15 +31,13 @@ const Order = () => {
     email: '',
     products: cartItems,
   });
-
   useEffect(() => {
-    if (!user || !user.user || user.user.id == null) {
+    if (!user || userId === null) {
       navigate('/');
     } else {
       setLoading(false);
     }
-  }, [user, navigate]);
-
+  }, [user, userId, navigate]);
   useEffect(() => {
     if (!cartItems || cartItems.length < 1) {
       navigate('/');
@@ -54,7 +58,7 @@ const Order = () => {
     shippingAddress: `${addressData.streetAddress}, ${addressData.city}, ${addressData.postCode}`,
     totalAmount: calculateTotalAmount(cartItems),
     orderStatus: 'PROCESSING',
-    userId: user.user.id,
+    userId: userId,
     products: cartItems.map((item) => ({
       productId: item.id,
       quantity: item.quantity,
@@ -114,7 +118,7 @@ const Order = () => {
       <section className={styles.orderDeliveryForm}>
         <Form onSubmit={handleFormSubmit}>
           <Form.Group>
-            <Form.Label>First Name</Form.Label>
+            <Form.Label for="firstName">First Name</Form.Label>
             <Form.Control
               type="text"
               id="firstName"
@@ -125,7 +129,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label for="lastName">Last Name</Form.Label>
             <Form.Control
               type="text"
               id="lastName"
@@ -136,10 +140,11 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label for="email">Email</Form.Label>
             <Form.Control
               type="email"
               id="email"
+              autoComplete="true"
               name="email"
               value={formData.email}
               onChange={handleFormInput}
@@ -147,9 +152,10 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Street</Form.Label>
+            <Form.Label for="streetAddress">Street</Form.Label>
             <Form.Control
               type="text"
+              id="streetAddress"
               name="streetAddress"
               value={addressData.streetAddress}
               onChange={handleAddressChange}
@@ -157,9 +163,10 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>City</Form.Label>
+            <Form.Label for="city">City</Form.Label>
             <Form.Control
               type="text"
+              id="city"
               name="city"
               value={addressData.city}
               onChange={handleAddressChange}
@@ -167,9 +174,10 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Postal Code</Form.Label>
+            <Form.Label for="postCode">Postal Code</Form.Label>
             <Form.Control
               type="text"
+              id="postCode"
               name="postCode"
               value={addressData.postCode}
               onChange={handleAddressChange}

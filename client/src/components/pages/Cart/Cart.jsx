@@ -60,7 +60,6 @@ const Cart = () => {
             <div className={styles.itemInfo}>
               <textarea
                 name="additionalInfo"
-                id="additionalInfo"
                 value={cartItem.additionalInfo}
                 onChange={(e) => {
                   const updatedInfo = e.target.value;
@@ -72,6 +71,7 @@ const Cart = () => {
               <div>
                 <input
                   type="number"
+                  name="quantity"
                   value={cartItem.quantity}
                   onChange={(e) =>
                     handleQuantityChange(cartItem, parseInt(e.target.value))

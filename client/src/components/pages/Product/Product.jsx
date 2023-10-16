@@ -71,32 +71,52 @@ const Product = () => {
                 </dd>
               </dl>
               <p>{currentProduct.description}</p>
-              <dd className={styles.productActionItem}>
-                <textarea
-                  placeholder="Additional request?"
-                  value={additionalInfo}
-                  onChange={(e) => setAdditionalInfo(e.target.value)}
-                ></textarea>
-              </dd>
-              <div className={styles.productAction}>
-                <dt className={styles.productActionItem}>Quantity:</dt>
-                <dd className={styles.productActionItem}>
-                  <input
-                    type="number"
-                    min="1"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                  />
-                </dd>
-                <Button
-                  onClick={() =>
-                    handleAddToCart(currentProduct, quantity, additionalInfo)
-                  }
-                >
-                  <span>Add</span>
-                  <HiShoppingBag className="mb-1 ms-2" />
-                </Button>
-              </div>
+
+              {currentProduct.stockQuantity > 0 ? (
+                <>
+                  {' '}
+                  <dd className={styles.productActionItem}>
+                    <textarea
+                      placeholder="Additional request?"
+                      name="additionalInfo"
+                      value={additionalInfo}
+                      onChange={(e) => setAdditionalInfo(e.target.value)}
+                    ></textarea>
+                  </dd>
+                  <div className={styles.productAction}>
+                    <dt className={styles.productActionItem}>Quantity:</dt>
+                    <dd className={styles.productActionItem}>
+                      <input
+                        className={styles.productActionItem}
+                        name="quantity"
+                        type="number"
+                        min="1"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                      />
+                    </dd>
+                    <Button
+                      onClick={() =>
+                        handleAddToCart(
+                          currentProduct,
+                          quantity,
+                          additionalInfo,
+                        )
+                      }
+                      className={styles.productActionItem}
+                    >
+                      <span>Add To Cart</span>
+                      <HiShoppingBag className="mb-1 ms-2" />
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <div className={styles.productAction}>
+                  <Button variant="danger" className={styles.productActionItem}>
+                    <span>Out of Stock</span>
+                  </Button>
+                </div>
+              )}
             </section>
           </div>
         </Row>
