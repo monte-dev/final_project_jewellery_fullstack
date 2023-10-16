@@ -1,10 +1,6 @@
-import {
-  Injectable,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Order, ProductOnOrder } from '@prisma/client';
+import { Order } from '@prisma/client';
 import { CreateOrderDto } from './dtos/create-order.dto';
 
 @Injectable()
@@ -47,7 +43,7 @@ export class OrdersService {
 
       return createdOrder;
     } catch (error) {
-      throw new Error('Error creating new order');
+      throw new Error('Error creating a new order');
     }
   }
 

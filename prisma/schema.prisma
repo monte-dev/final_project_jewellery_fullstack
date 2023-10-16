@@ -46,8 +46,8 @@ model Order {
 
 model ProductOnOrder {
   id              String @id @default(uuid())
-  order           Order  @relation(fields: [orderId], references: [id])
   orderId         String
+  order     Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
   quantity        Int
   additionalInfo  String
   product         Product @relation(fields: [productId], references: [id])

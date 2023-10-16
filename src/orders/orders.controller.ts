@@ -37,7 +37,7 @@ export class OrdersController {
 
   @UseGuards(JwtAuthGuard)
   @Delete('/:id')
-  deleteOrder(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.ordersService.deleteOrder(id);
+  async deleteOrder(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.ordersService.deleteOrder(id);
   }
 }
