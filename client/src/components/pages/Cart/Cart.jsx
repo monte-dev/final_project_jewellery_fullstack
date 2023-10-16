@@ -10,6 +10,7 @@ import styles from './Cart.module.css';
 import { HiTrash } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getProductImageSource } from '../../../utils/getProductImageSource';
 
 const Cart = () => {
   const cartItems = useSelector(getCart);
@@ -30,7 +31,6 @@ const Cart = () => {
       dispatch(updateQuantity(cartItem.id, 1));
     }
   };
-
   if (!cartItems || cartItems.length < 1) {
     return (
       <Container className="p-3">
@@ -50,10 +50,10 @@ const Cart = () => {
             <div className={styles.itemImage}>
               <img
                 alt={cartItem.name}
-                src="/assets/images/products/placeholder.svg"
+                src={getProductImageSource(cartItem)}
               ></img>
             </div>
-            <div className={styles.itemInfo}>
+            <div className={styles.itemInfoText}>
               <p>{cartItem.name}</p>
               <p>${cartItem.price}</p>
             </div>

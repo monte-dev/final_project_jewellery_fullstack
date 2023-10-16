@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
 import { clearOrder, createOrderRequest } from '../../../redux/orderReducer.js';
 import { clearCart, getCart } from '../../../redux/cartReducer.js';
+import { LoadingSpinner } from '../../features/LoadingSpinner/LoadingSpinner';
 import styles from './Order.module.css';
 
 const Order = () => {
@@ -65,7 +66,7 @@ const Order = () => {
       additionalInfo: item.additionalInfo || '',
     })),
   };
-  console.log(orderData);
+
   const handleFormInput = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -89,11 +90,7 @@ const Order = () => {
   };
 
   if (loading) {
-    return (
-      <Spinner animation="border" role="status">
-        Loading...
-      </Spinner>
-    );
+    return <LoadingSpinner />;
   } else if (orderSent) {
     return (
       <Alert variant="success">

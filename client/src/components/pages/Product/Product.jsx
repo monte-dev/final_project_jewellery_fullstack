@@ -1,17 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   fetchSingleProductFromAPI,
   getProductById,
 } from '../../../redux/productsReducer.js';
-import { Badge, Button, Container, Row } from 'react-bootstrap';
-import { HiShoppingBag, HiStar } from 'react-icons/hi';
-
-import styles from './product.module.css';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { HiArrowLeft } from 'react-icons/hi';
 import { addToCart } from '../../../redux/cartReducer.js';
+import { Badge, Button, Container, Row } from 'react-bootstrap';
+import { HiShoppingBag, HiStar, HiArrowLeft } from 'react-icons/hi';
+import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner.jsx';
+import { getProductImageSource } from '../../../utils/getProductImageSource.js';
+import styles from './product.module.css';
 
 const Product = () => {
   const { id } = useParams();
@@ -31,6 +30,12 @@ const Product = () => {
     dispatch(addToCart(currentProduct, quantity, additionalInfo));
   };
 
+  if (!currentProduct) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
+  let imgSrc = getProductImageSource(currentProduct);
+
   return (
     <Container className={styles.product}>
       <Button
@@ -48,7 +53,7 @@ const Product = () => {
               <img
                 className={styles.productImage}
                 alt={currentProduct.name}
-                src="/assets/images/products/placeholder.svg"
+                src={imgSrc}
               ></img>
             </aside>
             <section className={styles.productInfo}>

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartReducer';
 import { Button } from 'react-bootstrap';
 import styles from './ProductCard.module.css';
+import { getProductImageSource } from '../../../utils/getProductImageSource.js';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -13,10 +14,16 @@ const ProductCard = ({ product }) => {
   const handleAddToCart = (currentProduct, quantity) => {
     dispatch(addToCart(currentProduct, quantity));
   };
+  let imgSrc = getProductImageSource(product);
 
   return (
     <Card className={styles.productWrapper}>
-      <Card.Img variant="top" src={product.images[0].name} alt={product.name} />
+      <Card.Img
+        variant="top"
+        className={styles.productImage}
+        src={imgSrc}
+        alt={product.name}
+      />
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>
         <p>${product.price}</p>

@@ -5,10 +5,10 @@ import { getCart, removeFromCart, clearCart } from '../../../redux/cartReducer';
 import styles from './CartModal.module.css';
 import { NavLink } from 'react-router-dom';
 import { HiTrash } from 'react-icons/hi';
+import { getProductImageSource } from '../../../utils/getProductImageSource';
 
 const CartModal = ({ showModal, handleClose }) => {
   const cartItems = useSelector(getCart);
-  console.log(cartItems);
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +23,7 @@ const CartModal = ({ showModal, handleClose }) => {
               <div key={cartItem.id} className={styles.cartItem}>
                 <img
                   alt={cartItem.name}
-                  src="/assets/images/products/placeholder.svg"
+                  src={getProductImageSource(cartItem)}
                 ></img>
                 <div className={styles.cartItemInfo}>
                   <p>Name: {cartItem.name}</p>
