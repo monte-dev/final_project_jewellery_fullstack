@@ -52,11 +52,36 @@ export default function cartReducer(state = initialState, action = {}) {
   switch (action.type) {
     case ADD_TO_CART:
       const { product, quantity, additionalInfo } = action.payload;
-      const updatedItem = { ...product, quantity, additionalInfo };
-      return {
-        ...state,
-        cartItems: [...state.cartItems, updatedItem],
-      };
+      const existingItemIndex = state.cartItems.findIndex(
+        (item) => item.id === product.id,
+      );
+
+      if (existingItemIndex !== -1) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item, index) =>
+            index === existingItemIndex
+              ? {
+                  ...product,
+                  quantity: item.quantity + quantity,
+                  additionalInfo: additionalInfo,
+                }
+              : item,
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cartItems: [
+            ...state.cartItems,
+            {
+              ...product,
+              quantity,
+              additionalInfo,
+            },
+          ],
+        };
+      }
 
     case REMOVE_FROM_CART:
       const productRemovedId = action.payload;

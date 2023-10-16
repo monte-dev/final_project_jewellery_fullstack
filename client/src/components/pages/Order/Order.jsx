@@ -118,7 +118,7 @@ const Order = () => {
       <section className={styles.orderDeliveryForm}>
         <Form onSubmit={handleFormSubmit}>
           <Form.Group>
-            <Form.Label for="firstName">First Name</Form.Label>
+            <Form.Label htmlFor="firstName">First Name</Form.Label>
             <Form.Control
               type="text"
               id="firstName"
@@ -129,7 +129,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label for="lastName">Last Name</Form.Label>
+            <Form.Label htmlFor="lastName">Last Name</Form.Label>
             <Form.Control
               type="text"
               id="lastName"
@@ -140,7 +140,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label for="email">Email</Form.Label>
+            <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control
               type="email"
               id="email"
@@ -152,7 +152,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label for="streetAddress">Street</Form.Label>
+            <Form.Label htmlFor="streetAddress">Street</Form.Label>
             <Form.Control
               type="text"
               id="streetAddress"
@@ -163,7 +163,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label for="city">City</Form.Label>
+            <Form.Label htmlFor="city">City</Form.Label>
             <Form.Control
               type="text"
               id="city"
@@ -174,7 +174,7 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label for="postCode">Postal Code</Form.Label>
+            <Form.Label htmlFor="postCode">Postal Code</Form.Label>
             <Form.Control
               type="text"
               id="postCode"

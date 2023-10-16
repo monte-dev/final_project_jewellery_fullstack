@@ -8,6 +8,7 @@ import { HiTrash } from 'react-icons/hi';
 
 const CartModal = ({ showModal, handleClose }) => {
   const cartItems = useSelector(getCart);
+  console.log(cartItems);
   const dispatch = useDispatch();
 
   return (

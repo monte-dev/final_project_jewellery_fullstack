@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
               type="number"
               min="1"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
             />
             <Button
               onClick={() => handleAddToCart(product, quantity)}
