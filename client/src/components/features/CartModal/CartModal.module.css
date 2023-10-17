@@ -1,3 +1,17 @@
+@import '../../../styles/variables.module.css';
+
+.modalWrapper div {
+  background-color: var(--background-color);
+}
+
+.modalHeader {
+  color: var(--secondary-color);
+}
+
+.modalContent {
+  color: var(--white);
+}
+
 .cartItem {
   display: flex;
   align-items: center;
@@ -24,4 +38,22 @@
 
 .cartItemActions button {
   margin-top: 0.5rem;
+}
+
+.cartBtn {
+  padding: 4px 6px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.cartBtnSecondary {
+  padding: 4px 6px;
+  background-color: var(--background-gray);
+  color: var(--white);
+}
+
+.cartBtn:hover,
+.cartBtnSecondary:hover {
+  background-color: var(--white);
+  color: #000;
 }

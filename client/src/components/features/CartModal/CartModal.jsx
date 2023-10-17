@@ -13,11 +13,15 @@ const CartModal = ({ showModal, handleClose }) => {
 
   return (
     <>
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Your Cart</Modal.Title>
+      <Modal
+        show={showModal}
+        onHide={handleClose}
+        className={styles.modalWrapper}
+      >
+        <Modal.Header closeButton data-bs-theme="dark">
+          <Modal.Title className={styles.modalHeader}>Your Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={styles.modalContent}>
           {cartItems && cartItems.length > 0 ? (
             cartItems.map((cartItem) => (
               <div key={cartItem.id} className={styles.cartItem}>
@@ -46,11 +50,19 @@ const CartModal = ({ showModal, handleClose }) => {
         </Modal.Body>
         <Modal.Footer>
           <NavLink to="/cart">
-            <Button variant="primary" onClick={handleClose}>
+            <Button
+              variant="none"
+              className={styles.cartBtn}
+              onClick={handleClose}
+            >
               View/Edit Cart
             </Button>
           </NavLink>
-          <Button variant="danger" onClick={() => dispatch(clearCart())}>
+          <Button
+            variant="none"
+            className={styles.cartBtnSecondary}
+            onClick={() => dispatch(clearCart())}
+          >
             Clear Cart
           </Button>
         </Modal.Footer>

@@ -94,17 +94,17 @@ const Cart = () => {
           </p>
           {user.user ? (
             <NavLink to="/order">
-              <Button variant="primary">Continue To Checkout</Button>
+              <Button variant="none">Continue To Checkout</Button>
             </NavLink>
           ) : (
             <>
               <NavLink to="/login">
-                <Button variant="primary" className="ms-3">
+                <Button variant="none" className="ms-3">
                   Login
                 </Button>
               </NavLink>
               <NavLink to="/register">
-                <Button variant="primary">Register</Button>
+                <Button variant="none">Register</Button>
               </NavLink>
             </>
           )}
