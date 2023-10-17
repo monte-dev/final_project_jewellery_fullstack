@@ -1,1 +1,58 @@
 @import '../../../styles/variables.module.css';
+
+.navbar {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
+
+.navbarBrand > svg {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.navbarBrand > span {
+  color: var(--white);
+}
+
+.offcanvasHeader {
+  background-color: var(--secondary-color);
+}
+
+.offcanvasTitle {
+  font-size: 1.25rem;
+}
+
+.offcanvasBody {
+  text-align: center;
+
+  background-color: var(--background-color);
+}
+
+.navbar .navLink {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+.navbar .navLink:hover {
+  color: var(--white);
+
+  text-shadow: 1px 1px var(--white);
+}
+
+.cartBadge {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.cartIcon {
+  font-size: 1.125rem;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+@media screen and (min-width: 769px) {
+  .navMenu {
+    justify-content: end;
+    flex-grow: 1;
+    margin-right: 1.5rem;
+  }
+}

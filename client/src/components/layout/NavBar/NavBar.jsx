@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { getCart } from '../../../redux/cartReducer';
 import { getCurrentUser, logoutUserRequest } from '../../../redux/userReducer';
 import { useDispatch } from 'react-redux';
+import styles from './NavBar.module.css';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -50,45 +51,73 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar expand="md" className="bg-body-tertiary">
+      <Navbar expand="md" data-bs-theme="dark" className={styles.navbar}>
         <Container fluid>
-          <Navbar.Brand as={NavLink} to="/">
+          <Navbar.Brand as={NavLink} to="/" className={styles.navbarBrand}>
             <FaMountain className="mb-1 me-1" />
-            Summit Watches
+            <span>Summit Watches</span>
           </Navbar.Brand>
           <Navbar.Toggle
+            className={styles.navbarToggle}
             aria-controls="offcanvasNavbar-expand"
             onClick={toggleOffcanvas}
           />
           <Navbar.Offcanvas
+            data-bs-theme="dark"
             show={offCanvasOpen}
             onHide={handleCloseOffcanvas}
             id="offcanvasNavbar-expand"
             aria-labelledby="offcanvasNavbarLabel-expand"
             placement="end"
           >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel-expand">
-                Diamondville
+            <Offcanvas.Header closeButton className={styles.offcanvasHeader}>
+              <Offcanvas.Title
+                id="offcanvasNavbarLabel-expand"
+                as="div"
+                className={styles.offcanvasTitle}
+              >
+                Summit Watches
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3 me-3">
-                <Nav.Link as={NavLink} to="/" onClick={handleCloseOffcanvas}>
+            <Offcanvas.Body className={styles.offcanvasBody} as="div">
+              <Nav className={styles.navMenu}>
+                <Nav.Link
+                  className={styles.navLink}
+                  exact
+                  activeClassName={styles.activeNavLink}
+                  as={NavLink}
+                  to="/"
+                  onClick={handleCloseOffcanvas}
+                >
                   Home
                 </Nav.Link>
               </Nav>
-              <Nav className="me-3">
+              <Nav className={styles.navUser}>
                 {user ? (
                   <>
-                    <Nav.Link as={NavLink} className="px-0">
-                      <FaUser className="mb-1" />
+                    <Nav.Link
+                      className={styles.navLink}
+                      exact
+                      activeClassName={styles.activeNavLink}
+                      as={NavLink}
+                    >
+                      <FaUser />
                     </Nav.Link>
-                    <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                    <Nav.Link
+                      className={styles.navLink}
+                      exact
+                      activeClassName={styles.activeNavLink}
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </Nav.Link>
                   </>
                 ) : (
                   <>
                     <Nav.Link
+                      className={styles.navLink}
+                      exact
+                      activeClassName={styles.activeNavLink}
                       as={NavLink}
                       to="/login"
                       onClick={handleCloseOffcanvas}
@@ -96,6 +125,9 @@ const NavBar = () => {
                       Login
                     </Nav.Link>
                     <Nav.Link
+                      className={styles.navLink}
+                      exact
+                      activeClassName={styles.activeNavLink}
                       as={NavLink}
                       to="/register"
                       onClick={handleCloseOffcanvas}
@@ -112,8 +144,10 @@ const NavBar = () => {
                   handleCloseOffcanvas();
                 }}
               >
-                <Badge bg="info">{totalCartItems}</Badge>
-                <FaCartShopping size={18} className="ms-1 mb-1" />
+                <Badge bg="none" className={styles.cartBadge}>
+                  {totalCartItems}
+                </Badge>
+                <FaCartShopping className={styles.cartIcon} />
               </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
