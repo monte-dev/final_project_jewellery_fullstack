@@ -83,7 +83,6 @@ const Order = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(orderData);
     dispatch(createOrderRequest(orderData));
     setOrderSent(true);
     setTimeout(() => {

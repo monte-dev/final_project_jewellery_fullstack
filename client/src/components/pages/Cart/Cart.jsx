@@ -96,16 +96,11 @@ const Cart = () => {
               <Button variant="none">Continue To Checkout</Button>
             </NavLink>
           ) : (
-            <>
-              <NavLink to="/login">
-                <Button variant="none" className="ms-3">
-                  Login
-                </Button>
-              </NavLink>
-              <NavLink to="/register">
-                <Button variant="none">Register</Button>
-              </NavLink>
-            </>
+            <NavLink to="/login">
+              <Button variant="none" className="ms-3">
+                Login
+              </Button>
+            </NavLink>
           )}
         </div>
       </section>

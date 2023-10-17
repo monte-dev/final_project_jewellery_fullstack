@@ -118,6 +118,10 @@
     flex-direction: row;
   }
 
+  .productAction {
+    margin: 0;
+  }
+
   .productImagesWrapper {
     margin-bottom: 0;
     max-width: 50%;
