@@ -6,7 +6,7 @@ import {
   Button,
   Badge,
 } from 'react-bootstrap';
-import { HiOutlineShoppingCart, HiOutlineUser } from 'react-icons/hi';
+import { FaMountain, FaCartShopping, FaUser } from 'react-icons/fa6';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CartModal from '../../features/CartModal/CartModal';
 import { useState } from 'react';
@@ -50,10 +50,11 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar expand="md" className="bg-body-tertiary mb-3">
+      <Navbar expand="md" className="bg-body-tertiary">
         <Container fluid>
           <Navbar.Brand as={NavLink} to="/">
-            Diamondville
+            <FaMountain className="mb-1 me-1" />
+            Summit Watches
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="offcanvasNavbar-expand"
@@ -76,19 +77,12 @@ const NavBar = () => {
                 <Nav.Link as={NavLink} to="/" onClick={handleCloseOffcanvas}>
                   Home
                 </Nav.Link>
-                <Nav.Link
-                  as={NavLink}
-                  to="/contact"
-                  onClick={handleCloseOffcanvas}
-                >
-                  Contact us
-                </Nav.Link>
               </Nav>
               <Nav className="me-3">
                 {user ? (
                   <>
                     <Nav.Link as={NavLink} className="px-0">
-                      <HiOutlineUser />
+                      <FaUser className="mb-1" />
                     </Nav.Link>
                     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                   </>
@@ -118,10 +112,8 @@ const NavBar = () => {
                   handleCloseOffcanvas();
                 }}
               >
-                <Badge bg="info" className="align-middle top-0">
-                  {totalCartItems}
-                </Badge>
-                <HiOutlineShoppingCart size={22} />
+                <Badge bg="info">{totalCartItems}</Badge>
+                <FaCartShopping size={18} className="ms-1 mb-1" />
               </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

@@ -15,7 +15,7 @@ import { getProductImageSource } from '../../../utils/getProductImageSource';
 const Cart = () => {
   const cartItems = useSelector(getCart);
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.user);
   const cartTotal = cartItems
     .reduce((acc, item) => {
       const itemTotalCost = item.price * item.quantity;
@@ -92,9 +92,22 @@ const Cart = () => {
           <p>
             Total: <span>${cartTotal}</span>
           </p>
-          <NavLink to="/order">
-            <Button variant="primary">Continue To Checkout</Button>
-          </NavLink>
+          {user.user ? (
+            <NavLink to="/order">
+              <Button variant="primary">Continue To Checkout</Button>
+            </NavLink>
+          ) : (
+            <>
+              <NavLink to="/login">
+                <Button variant="primary" className="ms-3">
+                  Login
+                </Button>
+              </NavLink>
+              <NavLink to="/register">
+                <Button variant="primary">Register</Button>
+              </NavLink>
+            </>
+          )}
         </div>
       </section>
     </Container>

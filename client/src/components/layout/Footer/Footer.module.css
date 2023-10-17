@@ -1,0 +1,40 @@
+@import '../../../styles/variables.module.css';
+
+footer {
+  background-color: #333;
+  color: var(--white);
+
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.socialsLink {
+  text-decoration: none;
+  color: var(--white);
+  display: flex;
+  transition: color 0.2s;
+  align-items: center;
+}
+
+.socialsIcon {
+  transition: color 0.2s;
+  margin-right: 5px;
+}
+
+.socialsLink:hover .socialsIcon {
+  color: var(--secondary-color);
+}
+
+.socialsLink:hover {
+  color: var(--secondary-color);
+}
+
+.copyright {
+  margin-top: 14px;
+}

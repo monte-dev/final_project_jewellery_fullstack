@@ -40,9 +40,12 @@ const Login = () => {
         <Alert variant="danger">Incorrect email or password</Alert>
       )}
       <Form.Group className={styles.loginInput}>
-        <Form.Label>Email</Form.Label>
+        <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
           type="email"
+          id="email"
+          autoComplete="true"
+          name="email"
           required
           placeholder="Please enter your email..."
           value={email}
@@ -50,9 +53,11 @@ const Login = () => {
         ></Form.Control>
       </Form.Group>
       <Form.Group className={styles.loginInput}>
-        <Form.Label>Password</Form.Label>
+        <Form.Label htmlFor="password">Password</Form.Label>
         <Form.Control
           type="password"
+          id="password"
+          autoComplete="true"
           name="password"
           required
           placeholder="Please enter your password"
