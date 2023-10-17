@@ -56,8 +56,9 @@
   justify-content: flex-end;
 }
 
-.productActionBtn {
-  padding: 2px 0;
+.productAction .productActionBtn {
+  margin-left: 4px;
+  padding: 2px;
   background-color: var(--secondary-color);
   color: var(--white);
 }

@@ -32,6 +32,7 @@ const Order = () => {
     email: '',
     products: cartItems,
   });
+
   useEffect(() => {
     if (!user || userId === null) {
       navigate('/');
@@ -39,6 +40,7 @@ const Order = () => {
       setLoading(false);
     }
   }, [user, userId, navigate]);
+
   useEffect(() => {
     if (!cartItems || cartItems.length < 1) {
       navigate('/');
@@ -86,6 +88,7 @@ const Order = () => {
       navigate('/');
       dispatch(clearCart());
       dispatch(clearOrder());
+      localStorage.removeItem('cartItems');
     }, 5000);
   };
 

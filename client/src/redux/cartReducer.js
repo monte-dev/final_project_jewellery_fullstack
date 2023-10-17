@@ -1,3 +1,5 @@
+import { saveCartItemsToLocalStorage } from '../utils/saveCartItemsToLocalStorage';
+
 /* SELECTORS */
 export const getCart = ({ cart }) => cart.cartItems;
 
@@ -43,7 +45,7 @@ export const clearCart = () => ({
 /* INITIAL STATE */
 
 const initialState = {
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
 };
 
 /* REDUCER */
@@ -56,32 +58,35 @@ export default function cartReducer(state = initialState, action = {}) {
         (item) => item.id === product.id,
       );
 
+      let updatedCartItems;
+
       if (existingItemIndex !== -1) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((item, index) =>
-            index === existingItemIndex
-              ? {
-                  ...product,
-                  quantity: item.quantity + quantity,
-                  additionalInfo: additionalInfo,
-                }
-              : item,
-          ),
-        };
+        updatedCartItems = state.cartItems.map((item, index) =>
+          index === existingItemIndex
+            ? {
+                ...item,
+                quantity: item.quantity + quantity,
+                additionalInfo: additionalInfo,
+              }
+            : item,
+        );
       } else {
-        return {
-          ...state,
-          cartItems: [
-            ...state.cartItems,
-            {
-              ...product,
-              quantity,
-              additionalInfo,
-            },
-          ],
-        };
+        updatedCartItems = [
+          ...state.cartItems,
+          {
+            ...product,
+            quantity,
+            additionalInfo,
+          },
+        ];
       }
+
+      saveCartItemsToLocalStorage(updatedCartItems);
+
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+      };
 
     case REMOVE_FROM_CART:
       const productRemovedId = action.payload;
@@ -111,6 +116,7 @@ export default function cartReducer(state = initialState, action = {}) {
         ),
       };
     case CLEAR_CART:
+      localStorage.removeItem('cartItems');
       return { cartItems: [] };
     default:
       return state;
