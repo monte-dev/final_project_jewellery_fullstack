@@ -33,9 +33,7 @@
   font-size: 1rem;
 }
 .navbar .navLink:hover {
-  color: var(--white);
-
-  text-shadow: 1px 1px var(--white);
+  color: var(--secondary-color);
 }
 
 .cartBadge {
@@ -47,6 +45,10 @@
   font-size: 1.125rem;
   color: white;
   margin-left: 0.5rem;
+  transition: color 0.2s;
+}
+.cartIcon:hover {
+  color: var(--secondary-color);
 }
 
 @media screen and (min-width: 769px) {

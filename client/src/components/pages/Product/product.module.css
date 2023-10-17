@@ -1,72 +1,136 @@
+@import '../../../styles/variables.module.css';
+
 .product {
-  padding: 1rem;
+  padding: 2rem;
 }
+
 .productWrapper {
-  background-color: #fff;
+  background-color: var(--background-color);
+  color: var(--white);
   display: flex;
   flex-direction: column;
-  border: 1px solid #bcbcbc;
+  border: 1px solid #444;
   box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.05);
 }
+
 .productImagesWrapper {
   align-self: center;
   margin-bottom: 1rem;
 }
+
 .productImage {
   width: 100%;
-  max-height: 300px;
+  max-height: 400px;
 }
+
 .productInfo {
   padding: 1rem;
 }
+
 .productDescription {
   list-style-type: none;
-  border-bottom: 1px solid #bcbcbc;
+  border-bottom: 1px solid #444;
   padding-bottom: 0.5rem;
 }
+
 .productDescription > li {
   padding: 6px 0;
 }
-.productInfo p {
-  padding: 0 0 1rem 0;
+
+.productAdditonalInfo {
+  background-color: #c6c6c6;
+  resize: none;
+  width: 100%;
+  height: 100px;
 }
+
+.productPrice {
+  font-size: 1.25rem;
+}
+
+.productPriceIcon {
+  color: var(--secondary-color);
+  margin-bottom: 3px;
+}
+
 .productAction {
   display: flex;
+  flex-direction: column;
+  margin: 0 auto;
   max-width: 300px;
   gap: 4px;
   align-items: center;
 }
+
 .productActionItem {
   padding: 6px 0;
   margin-bottom: 0;
-}
-.productActionItem textarea {
-  resize: none;
-  width: 300px;
-}
-.productAction input {
-  max-width: 60px;
   text-align: center;
 }
-.productAction button {
-  padding: 2px 6px;
+
+.productAction input {
+  background-color: #c6c6c6;
+  max-width: 48px;
+  margin-left: 4px;
+  padding: 4px;
+  text-align: left;
 }
+
+.productAction .productActionBtn {
+  padding: 2px 6px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.productAction .productActionBtn:hover {
+  background-color: var(--background-gray);
+  color: var(--white);
+}
+
+.productActionBtnSecondary:disabled {
+  background-color: var(--white);
+  color: black;
+}
+
+@media (min-width: 576px) {
+  .productImagesWrapper {
+    max-width: 40%;
+  }
+
+  .productAction {
+    flex-direction: row;
+  }
+
+  .productActionItem {
+    text-align: left;
+  }
+
+  .productActionBtn {
+    margin-left: 1rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .productWrapper {
     flex-direction: row;
   }
+
   .productImagesWrapper {
-    margin: 1rem 1rem 1rem 0;
-    max-width: 45%;
+    margin-bottom: 0;
+    max-width: 50%;
+    height: fit-content;
+    max-height: 700px;
   }
+
   .productInfo {
-    margin: auto 1rem;
-    width: 60%;
+    margin: 0 1rem;
+    width: 50%;
   }
 }
-@media (min-width: 1200px) {
+
+@media (min-width: 1024px) {
   .product {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 }

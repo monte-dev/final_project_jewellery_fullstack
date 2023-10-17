@@ -1,9 +1,13 @@
+@import '../../../styles//variables.module.css';
+
 .container {
   min-height: calc(100vh - 120px);
-  background: #f8f9fa;
+  background: var(--background-gray);
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 .section {
   padding: 1rem;
-  background: #000;
+  background: var(--background-gray);
   display: flex;
 }

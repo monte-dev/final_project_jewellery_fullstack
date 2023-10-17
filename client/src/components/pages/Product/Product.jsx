@@ -6,7 +6,7 @@ import {
   getProductById,
 } from '../../../redux/productsReducer.js';
 import { addToCart } from '../../../redux/cartReducer.js';
-import { Badge, Button, Container, Row } from 'react-bootstrap';
+import { Badge, Button } from 'react-bootstrap';
 import { HiShoppingBag, HiStar, HiArrowLeft } from 'react-icons/hi';
 import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner.jsx';
 import { getProductImageSource } from '../../../utils/getProductImageSource.js';
@@ -37,7 +37,7 @@ const Product = () => {
   let imgSrc = getProductImageSource(currentProduct);
 
   return (
-    <Container className={styles.product}>
+    <div className={styles.product}>
       <Button
         variant="outline-dark"
         className="my-2 py-1"
@@ -47,90 +47,91 @@ const Product = () => {
         <span className="fs-6">Return</span>
       </Button>
       {currentProduct ? (
-        <Row>
-          <div className={styles.productWrapper}>
-            <aside className={styles.productImagesWrapper}>
-              <img
-                className={styles.productImage}
-                alt={currentProduct.name}
-                src={imgSrc}
-              ></img>
-            </aside>
-            <section className={styles.productInfo}>
-              <h3>{currentProduct.name}</h3>
-              <dl className={styles.productDescription}>
-                <dd>
-                  {currentProduct.stockQuantity > 5 ? (
-                    <Badge bg="success">Stock Available</Badge>
-                  ) : currentProduct.stockQuantity > 0 ? (
-                    <Badge bg="warning">Selling Fast</Badge>
-                  ) : (
-                    <Badge bg="danger">Out of Stock</Badge>
-                  )}
-                </dd>
-                <dd className="fs-3">{`$${currentProduct.price}`}</dd>
-                <dd>
-                  <span>Rating:</span>
-                  <HiStar />
-                  <span> {currentProduct.rating}</span>
-                </dd>
-              </dl>
-              <p>{currentProduct.description}</p>
+        <div className={styles.productWrapper}>
+          <aside className={styles.productImagesWrapper}>
+            <img
+              className={styles.productImage}
+              alt={currentProduct.name}
+              src={imgSrc}
+            ></img>
+          </aside>
+          <section className={styles.productInfo}>
+            <h3>{currentProduct.name}</h3>
+            <dl className={styles.productDescription}>
+              <dd>
+                {currentProduct.stockQuantity > 5 ? (
+                  <Badge bg="success">Stock Available</Badge>
+                ) : currentProduct.stockQuantity > 0 ? (
+                  <Badge bg="warning">Selling Fast</Badge>
+                ) : (
+                  <Badge bg="danger">Out of Stock</Badge>
+                )}
+              </dd>
+              <dd
+                className={styles.productPrice}
+              >{`$${currentProduct.price.toLocaleString()}`}</dd>
+              <dd>
+                <HiStar className={styles.productPriceIcon} />
+                <span> {currentProduct.rating}</span>
+              </dd>
+            </dl>
+            <p>{currentProduct.description}</p>
 
-              {currentProduct.stockQuantity > 0 ? (
-                <>
-                  {' '}
-                  <dd className={styles.productActionItem}>
-                    <textarea
-                      placeholder="Additional request?"
-                      name="additionalInfo"
-                      value={additionalInfo}
-                      onChange={(e) => setAdditionalInfo(e.target.value)}
-                    ></textarea>
-                  </dd>
-                  <div className={styles.productAction}>
-                    <dt className={styles.productActionItem}>Quantity:</dt>
-                    <dd className={styles.productActionItem}>
-                      <input
-                        className={styles.productActionItem}
-                        name="quantity"
-                        type="number"
-                        min="1"
-                        value={quantity}
-                        onChange={(e) =>
-                          setQuantity(parseInt(e.target.value, 10))
-                        }
-                      />
-                    </dd>
-                    <Button
-                      onClick={() =>
-                        handleAddToCart(
-                          currentProduct,
-                          quantity,
-                          additionalInfo,
-                        )
-                      }
-                      className={styles.productActionItem}
-                    >
-                      <span>Add To Cart</span>
-                      <HiShoppingBag className="mb-1 ms-2" />
-                    </Button>
-                  </div>
-                </>
-              ) : (
+            {currentProduct.stockQuantity > 0 ? (
+              <>
+                {' '}
+                <dd className={styles.productActionItem}>
+                  <textarea
+                    className={styles.productAdditonalInfo}
+                    placeholder="Additional request?"
+                    name="additionalInfo"
+                    value={additionalInfo}
+                    onChange={(e) => setAdditionalInfo(e.target.value)}
+                  ></textarea>
+                </dd>
                 <div className={styles.productAction}>
-                  <Button variant="danger" className={styles.productActionItem}>
-                    <span>Out of Stock</span>
+                  <dd className={styles.productActionItem}>
+                    Quantity:
+                    <input
+                      className={styles.productActionItem}
+                      name="quantity"
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={(e) =>
+                        setQuantity(parseInt(e.target.value, 10))
+                      }
+                    />
+                  </dd>
+                  <Button
+                    variant="none"
+                    onClick={() =>
+                      handleAddToCart(currentProduct, quantity, additionalInfo)
+                    }
+                    className={styles.productActionBtn}
+                  >
+                    <span>Add To Cart</span>
+                    <HiShoppingBag className="mb-1 ms-2" />
                   </Button>
                 </div>
-              )}
-            </section>
-          </div>
-        </Row>
+              </>
+            ) : (
+              <div className={styles.productAction}>
+                <Button
+                  variant="none"
+                  disabled
+                  className={styles.productActionBtnSecondary}
+                >
+                  <span>Out of Stock</span>
+                </Button>
+              </div>
+            )}
+          </section>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
-    </Container>
+    </div>
   );
 };
 export default Product;

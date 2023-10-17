@@ -83,8 +83,6 @@ const NavBar = () => {
               <Nav className={styles.navMenu}>
                 <Nav.Link
                   className={styles.navLink}
-                  exact
-                  activeClassName={styles.activeNavLink}
                   as={NavLink}
                   to="/"
                   onClick={handleCloseOffcanvas}
@@ -95,20 +93,10 @@ const NavBar = () => {
               <Nav className={styles.navUser}>
                 {user ? (
                   <>
-                    <Nav.Link
-                      className={styles.navLink}
-                      exact
-                      activeClassName={styles.activeNavLink}
-                      as={NavLink}
-                    >
+                    <Nav.Link className={styles.navLink} as={NavLink}>
                       <FaUser />
                     </Nav.Link>
-                    <Nav.Link
-                      className={styles.navLink}
-                      exact
-                      activeClassName={styles.activeNavLink}
-                      onClick={handleLogout}
-                    >
+                    <Nav.Link className={styles.navLink} onClick={handleLogout}>
                       Logout
                     </Nav.Link>
                   </>
@@ -116,8 +104,6 @@ const NavBar = () => {
                   <>
                     <Nav.Link
                       className={styles.navLink}
-                      exact
-                      activeClassName={styles.activeNavLink}
                       as={NavLink}
                       to="/login"
                       onClick={handleCloseOffcanvas}
@@ -126,8 +112,6 @@ const NavBar = () => {
                     </Nav.Link>
                     <Nav.Link
                       className={styles.navLink}
-                      exact
-                      activeClassName={styles.activeNavLink}
                       as={NavLink}
                       to="/register"
                       onClick={handleCloseOffcanvas}

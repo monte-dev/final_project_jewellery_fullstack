@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
   let imgSrc = getProductImageSource(product);
 
   return (
-    <Card className={styles.productWrapper}>
+    <Card className={styles.productWrapper} as="div" data-bs-theme="dark">
       <Card.Img
         variant="top"
         className={styles.productImage}
@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
         alt={product.name}
       />
       <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
+        <Card.Title as="h5">{product.name}</Card.Title>
         <p>${product.price}</p>
         <Link
           to={`/product/${product.id}`}
@@ -47,8 +47,9 @@ const ProductCard = ({ product }) => {
               onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
             />
             <Button
+              variant="none"
               onClick={() => handleAddToCart(product, quantity)}
-              className={styles.productActionItem}
+              className={styles.productActionBtn}
             >
               <span>Add To Cart</span>
               <HiShoppingBag className="mb-1 ms-2" />
@@ -56,7 +57,11 @@ const ProductCard = ({ product }) => {
           </div>
         ) : (
           <div className={styles.productAction}>
-            <Button variant="danger" className={styles.productActionItem}>
+            <Button
+              variant="none"
+              disabled
+              className={styles.productActionBtnSecondary}
+            >
               <span>Out of Stock</span>
             </Button>
           </div>

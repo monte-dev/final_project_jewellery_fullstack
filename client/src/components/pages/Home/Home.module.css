@@ -1,5 +1,7 @@
-.products-parent {
-  background: #f8f9fa;
+@import '../../../styles//variables.module.css';
+
+.productsParent {
+  background: var(--background-gray);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -7,15 +9,14 @@
   padding: 1rem 0;
 }
 
-.product-card {
-  border: 1px solid black;
+.productCard {
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 40%;
 }
 
 @media (min-width: 1200px) {
-  .products-parent {
+  .productsParent {
     max-width: 1400px;
     margin: 0 auto;
   }

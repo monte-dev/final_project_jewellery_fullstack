@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../features/ProductCard/ProductCard.jsx';
-import './Home.css';
+import styles from './Home.module.css';
 import { Spinner } from 'react-bootstrap';
 
 const Home = () => {
@@ -32,7 +32,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <main className="products-parent">
+    <main className={styles.productsParent}>
       {isLoading && !products ? (
         <Spinner animation="grow" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -40,7 +40,7 @@ const Home = () => {
       ) : (
         products.map((product) => (
           <ProductCard
-            className="product-card"
+            className={styles.productCard}
             key={product.id}
             product={product}
           />

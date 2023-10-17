@@ -1,10 +1,10 @@
 @import '../../../styles/variables.module.css';
 
 footer {
-  background-color: #333;
+  background: var(--background-color);
   color: var(--white);
-
-  padding: 20px 0;
+  font-size: 14px;
+  padding: 10px 0;
   text-align: center;
 }
 
@@ -36,5 +36,5 @@ footer {
 }
 
 .copyright {
-  margin-top: 14px;
+  margin-top: 6px;
 }
