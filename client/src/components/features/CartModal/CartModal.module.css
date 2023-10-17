@@ -4,7 +4,7 @@
   background-color: var(--background-color);
 }
 
-.modalHeader {
+.modalWrapper .modalHeader {
   color: var(--secondary-color);
 }
 
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #555;
 }
 
 .cartItem img {
@@ -40,20 +40,20 @@
   margin-top: 0.5rem;
 }
 
-.cartBtn {
+.modalFooter .cartBtn {
   padding: 4px 6px;
   background-color: var(--secondary-color);
   color: var(--white);
 }
 
-.cartBtnSecondary {
+.modalFooter .cartBtnSecondary {
   padding: 4px 6px;
   background-color: var(--background-gray);
   color: var(--white);
 }
 
-.cartBtn:hover,
-.cartBtnSecondary:hover {
+.modalFooter .cartBtn:hover,
+.modalFooter .cartBtnSecondary:hover {
   background-color: var(--white);
   color: #000;
 }

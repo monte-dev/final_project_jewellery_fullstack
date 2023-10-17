@@ -1,19 +1,39 @@
-.loginWrapper {
-  max-width: 600px;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
+form {
   margin: 0 auto;
-  padding: 1rem 0;
+  max-width: 400px;
 }
+.loginWrapper {
+  border: 1px solid #777;
+  background: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  margin: 1rem;
+}
+
 .loginInput {
   margin: 0 auto;
   max-width: 300px;
 }
-.loginButton {
-  margin: 1rem auto;
 
+.loginInput label {
+  margin-top: 1rem;
+  color: var(--primary-color);
+}
+
+.loginWrapper .loginButton {
+  margin: 1rem auto;
   max-width: 200px;
+  padding: 4px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.loginWrapper .loginButton:hover {
+  background-color: var(--white);
+  color: var(--background-gray);
 }
 
 @media screen and (min-width: 576px) {

@@ -1,14 +1,40 @@
 .orderWrapper {
-  max-width: 1000px;
-  background: #fff;
+  max-width: 300px;
+  background-color: var(--background-color);
+  color: var(--white);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
+}
+.orderWrapper h2 {
+  color: var(--primary-color);
+}
+
+.orderSummary {
+  margin-bottom: 1px solid var(--white);
+}
+
+.orderDeliveryForm .btnOrder {
+  margin-left: 4px;
+  padding: 4px 6px;
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.orderDeliveryForm .btnOrder:hover {
+  background-color: var(--background-gray);
+  color: var(--white);
+}
+
+.orderInput {
+  margin-bottom: 1.5rem;
 }
 
 @media screen and (min-width: 576px) {
   .orderWrapper {
+    max-width: 550px;
     padding: 2.5rem 3rem;
   }
 }

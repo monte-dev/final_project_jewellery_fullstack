@@ -114,6 +114,7 @@ const NavBar = () => {
                       className={styles.navLink}
                       as={NavLink}
                       to="/register"
+                      disabled
                       onClick={handleCloseOffcanvas}
                     >
                       Register

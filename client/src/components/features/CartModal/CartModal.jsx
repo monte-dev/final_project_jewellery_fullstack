@@ -31,7 +31,7 @@ const CartModal = ({ showModal, handleClose }) => {
                 ></img>
                 <div className={styles.cartItemInfo}>
                   <p>Name: {cartItem.name}</p>
-                  <p>Price: {cartItem.price}</p>
+                  <p>Price: ${cartItem.price.toLocaleString()}</p>
                   <p>Quantity: {cartItem.quantity}</p>
                 </div>
                 <div className={styles.cartItemActions}>
@@ -48,7 +48,7 @@ const CartModal = ({ showModal, handleClose }) => {
             <></>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className={styles.modalFooter}>
           <NavLink to="/cart">
             <Button
               variant="none"

@@ -11,12 +11,14 @@ const Order = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
   let userId;
   if (user.user !== null) {
     userId = user.user.id;
   } else {
     userId = null;
   }
+
   const cartItems = useSelector(getCart);
   const [loading, setLoading] = useState(false);
   const [orderSent, setOrderSent] = useState(false);
@@ -96,15 +98,16 @@ const Order = () => {
     return <LoadingSpinner />;
   } else if (orderSent) {
     return (
-      <Alert variant="success">
+      <Alert variant="success" className={styles.orderWrapper}>
         Your order has been submitted successfully!
         <hr></hr>
         <p>You will be redirected in 5 seconds...</p>
       </Alert>
     );
   }
+
   return (
-    <main>
+    <main className={styles.orderWrapper}>
       <h2>Order Summary</h2>
       <section className={styles.orderSummary}>
         <ul>
@@ -120,6 +123,7 @@ const Order = () => {
           <Form.Group>
             <Form.Label htmlFor="firstName">First Name</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="text"
               id="firstName"
               name="firstName"
@@ -131,6 +135,7 @@ const Order = () => {
           <Form.Group>
             <Form.Label htmlFor="lastName">Last Name</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="text"
               id="lastName"
               name="lastName"
@@ -140,13 +145,13 @@ const Order = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label htmlFor="email">Email</Form.Label>
+            <Form.Label htmlFor="emailAddress">Email</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="email"
-              id="email"
-              autoComplete="true"
-              name="email"
-              value={formData.email}
+              id="emailAddress"
+              name="emailAddress"
+              value={formData.emailAddress}
               onChange={handleFormInput}
               required
             ></Form.Control>
@@ -154,6 +159,7 @@ const Order = () => {
           <Form.Group>
             <Form.Label htmlFor="streetAddress">Street</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="text"
               id="streetAddress"
               name="streetAddress"
@@ -165,6 +171,7 @@ const Order = () => {
           <Form.Group>
             <Form.Label htmlFor="city">City</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="text"
               id="city"
               name="city"
@@ -176,6 +183,7 @@ const Order = () => {
           <Form.Group>
             <Form.Label htmlFor="postCode">Postal Code</Form.Label>
             <Form.Control
+              className={styles.orderInput}
               type="text"
               id="postCode"
               name="postCode"
@@ -184,7 +192,9 @@ const Order = () => {
               required
             ></Form.Control>
           </Form.Group>
-          <Button type="submit">Pay now</Button>
+          <Button variant="none" className={styles.btnOrder} type="submit">
+            Order
+          </Button>
         </Form>
       </section>
     </main>

@@ -35,39 +35,46 @@ const Login = () => {
   }, [user, navigate]);
 
   return (
-    <Form onSubmit={handleLoginForm} className={styles.loginWrapper}>
-      {loginError && (
-        <Alert variant="danger">Incorrect email or password</Alert>
-      )}
-      <Form.Group className={styles.loginInput}>
-        <Form.Label htmlFor="email">Email</Form.Label>
-        <Form.Control
-          type="email"
-          id="email"
-          autoComplete="true"
-          name="email"
-          required
-          placeholder="Please enter your email..."
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
-      <Form.Group className={styles.loginInput}>
-        <Form.Label htmlFor="password">Password</Form.Label>
-        <Form.Control
-          type="password"
-          id="password"
-          autoComplete="true"
-          name="password"
-          required
-          placeholder="Please enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
-      <Button className={styles.loginButton} type="submit">
-        Login now
-      </Button>
+    <Form onSubmit={handleLoginForm} data-bs-theme="dark">
+      <Alert className="text-center m-auto w-75">
+        <p>Test login details:</p>
+        <p>johndoe@gmail.com</p>
+        <p>somepass123</p>
+      </Alert>
+      <div className={styles.loginWrapper}>
+        {loginError && (
+          <Alert variant="danger">Incorrect email or password</Alert>
+        )}
+        <Form.Group className={styles.loginInput}>
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Control
+            type="email"
+            id="email"
+            autoComplete="true"
+            name="email"
+            required
+            placeholder="Please enter your email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group className={styles.loginInput}>
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            type="password"
+            id="password"
+            autoComplete="true"
+            name="password"
+            required
+            placeholder="Please enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Button variant="none" className={styles.loginButton} type="submit">
+          Login now
+        </Button>
+      </div>
     </Form>
   );
 };

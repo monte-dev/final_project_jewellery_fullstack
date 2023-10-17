@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: 600px;
+  padding: 2rem;
+  margin: 0 auto;
+  color: var(--primary-color);
+}
+
+.wrapper h2 {
+  color: #fff;
+}

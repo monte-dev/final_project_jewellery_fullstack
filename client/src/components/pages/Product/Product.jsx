@@ -39,8 +39,8 @@ const Product = () => {
   return (
     <div className={styles.product}>
       <Button
-        variant="outline-dark"
-        className="my-2 py-1"
+        variant="none"
+        className={styles.productActionBtn}
         onClick={() => navigate('/')}
       >
         <HiArrowLeft className="mb-1 me-2" size={18} />
@@ -79,7 +79,6 @@ const Product = () => {
 
             {currentProduct.stockQuantity > 0 ? (
               <>
-                {' '}
                 <dd className={styles.productActionItem}>
                   <textarea
                     className={styles.productAdditonalInfo}

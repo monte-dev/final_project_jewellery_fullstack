@@ -9,6 +9,7 @@
   color: var(--white);
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
   border: 1px solid #444;
   box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.05);
 }
@@ -76,13 +77,15 @@
   text-align: left;
 }
 
-.productAction .productActionBtn {
+.productAction .productActionBtn,
+.product .productActionBtn {
   padding: 2px 6px;
   background-color: var(--secondary-color);
   color: var(--white);
 }
 
-.productAction .productActionBtn:hover {
+.productAction .productActionBtn:hover,
+.product .productActionBtn:hover {
   background-color: var(--background-gray);
   color: var(--white);
 }

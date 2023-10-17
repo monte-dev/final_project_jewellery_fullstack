@@ -21,8 +21,7 @@ const Cart = () => {
       const itemTotalCost = item.price * item.quantity;
       return acc + itemTotalCost;
     }, 0)
-    .toFixed(2);
-
+    .toLocaleString();
   const handleQuantityChange = (cartItem, updatedQuantity) => {
     if (updatedQuantity >= 1) {
       const validatedQuantity = Math.min(updatedQuantity, 100);
