@@ -36,9 +36,12 @@ export const createOrderRequest = (orderData) => {
           'Content-Type': 'application/json',
         },
       };
+      console.log(orderData);
       await axios.post(`${API_URL}/orders`, orderData, options);
       dispatch(createOrder(orderData));
     } catch (err) {
+      console.log(orderData);
+      console.log(err.reponse);
       console.log(err);
       dispatch(createOrderError(err.message));
     }
@@ -56,7 +59,6 @@ const initialState = {
 export default function orderReducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_ORDER:
-      console.log(action.payload);
       return { ...state, order: action.payload };
     case CREATE_ORDER_ERROR:
       return { ...state, error: action.payload };
