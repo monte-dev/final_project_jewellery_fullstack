@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartReducer';
 import { Button } from 'react-bootstrap';
 import styles from './ProductCard.module.css';
-import { getProductImageSource } from '../../../utils/getProductImageSource.js';
+import { getProductImageSource } from '../../../utils/getProductImageSource.ts';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();

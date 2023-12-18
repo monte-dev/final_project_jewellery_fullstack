@@ -8,8 +8,8 @@ import {
 import { addToCart } from '../../../redux/cartReducer.js';
 import { Badge, Button } from 'react-bootstrap';
 import { HiShoppingBag, HiStar, HiArrowLeft } from 'react-icons/hi';
-import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner.jsx';
-import { getProductImageSource } from '../../../utils/getProductImageSource.js';
+import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner.tsx';
+import { getProductImageSource } from '../../../utils/getProductImageSource.ts';
 import styles from './product.module.css';
 
 const Product = () => {
