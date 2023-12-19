@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { clearOrder, createOrderRequest } from '../../../redux/orderReducer.js';
-import { clearCart, getCart } from '../../../redux/cartReducer.js';
+import { clearCart, getCart } from '../../../redux/cartReducer.ts';
 import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner';
 import styles from './Order.module.css';
 

@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import initialState from './initialState';
 import productsReducer from './productsReducer.js';
 import userReducer from './userReducer.js';
-import cartReducer from './cartReducer.js';
+import cartReducer from './cartReducer.ts';
 import orderReducer from './orderReducer';
 
 const subreducers = {

@@ -1,7 +1,13 @@
 import { Product } from '../types/product';
 import { saveCartItemsToLocalStorage } from '../utils/saveCartItemsToLocalStorage';
+
+type CartItem = Product & {
+  quantity: number;
+  additionalInfo: string;
+};
+
 type Cart = {
-  cartItems: Product[];
+  cartItems: CartItem[];
 };
 
 /* SELECTORS */
@@ -18,7 +24,7 @@ const UPDATE_QUANTITY = createActionName('UPDATE_QUANTITY');
 const UPDATE_INFO = createActionName('UPDATE_INFO');
 
 export const updateQuantity = (productId: string, quantity: number) => ({
-  type: UPDATE_QUANTITY,
+  type: typeof UPDATE_QUANTITY,
   payload: { productId, quantity },
 });
 
@@ -26,7 +32,7 @@ export const updateAdditionalInfo = (
   cartItemId: string,
   updatedInfo: string,
 ) => ({
-  type: UPDATE_INFO,
+  type: typeof UPDATE_INFO,
   payload: {
     cartItemId,
     updatedInfo,
@@ -34,40 +40,39 @@ export const updateAdditionalInfo = (
 });
 
 export const addToCart = (
-  product: Product,
-  quantity: string,
+  product: string,
+  quantity: number,
   additionalInfo: string,
 ) => ({
-  type: ADD_TO_CART,
+  type: typeof ADD_TO_CART,
   payload: { product, quantity, additionalInfo },
 });
 
 export const removeFromCart = (productId: string) => ({
-  type: REMOVE_FROM_CART,
+  type: typeof REMOVE_FROM_CART,
   payload: productId,
 });
 
 export const clearCart = () => ({
-  type: CLEAR_CART,
+  type: typeof CLEAR_CART,
 });
 
 /* THUNKS */
 
 /* INITIAL STATE */
-
-const cartItemsFromLocalStorage = localStorage.getItem('cartItems');
+const storedCartItems = localStorage.getItem('cartItems');
 const initialState: Cart = {
-  cartItems: cartItemsFromLocalStorage
-    ? JSON.parse(cartItemsFromLocalStorage)
-    : [],
+  cartItems: storedCartItems ? JSON.parse(storedCartItems) : [],
 };
-
 /* REDUCER */
 
-export default function cartReducer(state = initialState, action: any) {
+export default function cartReducer(
+  state: Cart = initialState,
+  action: any = {},
+) {
   switch (action.type) {
     case ADD_TO_CART:
-      const { product, stockQuantity, additionalInfo } = action.payload;
+      const { product, quantity, additionalInfo } = action.payload;
       const existingItemIndex = state.cartItems.findIndex(
         (item) => item.id === product.id,
       );
@@ -79,7 +84,7 @@ export default function cartReducer(state = initialState, action: any) {
           index === existingItemIndex
             ? {
                 ...item,
-                stockQuantity: item.stockQuantity + stockQuantity,
+                quantity: item.quantity + quantity,
                 additionalInfo: additionalInfo,
               }
             : item,
@@ -89,7 +94,7 @@ export default function cartReducer(state = initialState, action: any) {
           ...state.cartItems,
           {
             ...product,
-            stockQuantity,
+            quantity,
             additionalInfo,
           },
         ];
@@ -111,13 +116,11 @@ export default function cartReducer(state = initialState, action: any) {
         ),
       };
     case UPDATE_QUANTITY:
-      const { productId, stockQuantity: updatedQuantity } = action.payload;
+      const { productId, quantity: updatedQuantity } = action.payload;
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
-          item.id === productId
-            ? { ...item, stockQuantity: updatedQuantity }
-            : item,
+          item.id === productId ? { ...item, quantity: updatedQuantity } : item,
         ),
       };
     case UPDATE_INFO:

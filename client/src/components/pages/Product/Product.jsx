@@ -5,7 +5,7 @@ import {
   fetchSingleProductFromAPI,
   getProductById,
 } from '../../../redux/productsReducer.js';
-import { addToCart } from '../../../redux/cartReducer.js';
+import { addToCart } from '../../../redux/cartReducer.ts';
 import { Badge, Button } from 'react-bootstrap';
 import { HiShoppingBag, HiStar, HiArrowLeft } from 'react-icons/hi';
 import LoadingSpinner from '../../features/LoadingSpinner/LoadingSpinner.tsx';
