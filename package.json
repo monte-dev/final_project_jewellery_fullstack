@@ -28,7 +28,7 @@
     "@nestjs/serve-static": "^4.0.0",
     "@prisma/client": "^5.3.1",
     "@types/bcryptjs": "^2.4.4",
-    "@types/passport-local": "^1.0.34",
+    "@types/passport-local": "^1.0.38",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
