@@ -2,12 +2,7 @@
 
 ## Overview
 
-Summitwatches is a web application that allows users to explore and purchase luxury watches. It offers a range of features, including viewing a catalog of luxury watches, individual product details, user authentication, managing a shopping cart, and placing orders.
-
-## Preview
-
-![mobile preview](mobile-preview.gif)
-![desktop preview](desktop-preview.gif)
+Summitwatches is a web application that allows users to explore and purchase luxury watches. It offers a range of features, including viewing a catalog of luxury watches, individual product details, user authentication, managing a shopping cart, and placing order
 
 ## Tech Stack
 
